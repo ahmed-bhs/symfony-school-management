@@ -1,18 +1,37 @@
-/app/config/parameters.yml
-/build/
-/phpunit.xml
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
 /vendor/
-/web/bundles/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+# IDE
 .idea/
-.php_cs.cache
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Old Symfony 3 files (keep for reference)
+/app/
+/web/
+/src/AppBundle/
+/src/EcoleBundle/
+
+# Composer
+composer.phar
+
+# Docker volumes
+/docker/volumes/

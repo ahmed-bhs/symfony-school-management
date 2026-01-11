@@ -1,0 +1,45 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}
+    <h1 class="title">Bienvenue dans le système de gestion scolaire</h1>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Tableau de bord</h2>
+                    <p>Utilisez le menu de gauche pour accéder aux différentes sections du système de gestion scolaire.</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">👨‍🎓 Étudiants</h5>
+                                    <p class="card-text">Gérer les étudiants et leurs informations</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">👨‍🏫 Professeurs</h5>
+                                    <p class="card-text">Gérer les professeurs et leurs séances</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-info text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">📊 Évaluations</h5>
+                                    <p class="card-text">Gérer les évaluations et notes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
