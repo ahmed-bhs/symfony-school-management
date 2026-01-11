@@ -55,6 +55,10 @@ db-reset: ## 🗑️ Reset complet de la base de données
 db-schema: ## 📊 Affiche le schéma SQL
 	docker-compose exec php php bin/console doctrine:schema:update --dump-sql
 
+db-fixtures: ## 🌱 Charge les fixtures (données de test)
+	docker-compose exec -T php php bin/console doctrine:fixtures:load --no-interaction
+	@echo "✅ Fixtures chargées"
+
 # Cache
 cache: ## 🧹 Vide le cache Symfony
 	docker-compose exec -T php php bin/console cache:clear
@@ -105,6 +109,17 @@ clean: ## 🧼 Nettoie le projet (supprime les volumes)
 	@echo "⚠️  Suppression de tous les volumes..."
 	docker-compose down -v
 	@echo "✅ Projet nettoyé"
+
+# Démo
+demo: ## 🎉 Installation complète avec données de démo
+	@echo "🎉 Installation complète avec données de démo..."
+	@make build
+	@make db-fixtures
+	@echo "\n✨ Démo prête!"
+	@echo "\n👤 Utilisateur admin créé:"
+	@echo "   Email: admin@ecole.com"
+	@echo "   Mot de passe: admin"
+	@make status
 
 # Raccourcis
 up: start ## Alias pour start
