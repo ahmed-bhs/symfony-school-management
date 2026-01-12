@@ -9,14 +9,16 @@ use App\Repository\ClasseRepository;
 use App\Repository\EvaluationRepository;
 use App\Repository\NoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin/mass-grade-entry')]
-class MassGradeEntryController extends AbstractController
+class MassGradeEntryController extends AbstractDashboardController
 {
     public function __construct(
         private ClasseRepository $classeRepository,
@@ -25,6 +27,20 @@ class MassGradeEntryController extends AbstractController
         private EntityManagerInterface $entityManager,
         private TranslatorInterface $translator
     ) {
+    }
+
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
+            ->setTitle($this->translator->trans('app.name', [], 'messages'))
+            ->setFaviconPath('favicon.ico')
+            ->setLocales(['fr' => 'Français', 'en' => 'English', 'ar' => 'العربية']);
+    }
+
+    public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('menu.dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('action.back', 'fa fa-arrow-left', 'admin');
     }
 
     #[Route('/select-class', name: 'admin_mass_grade_select_class')]
