@@ -1,13 +1,13 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block page_title %}
-    <i class="fa fa-school"></i> {{ 'class_selection.select_class'|trans }} - {{ entity_label }}
+    <i class="fa fa-school"></i> {{ 'class_selection.select_class'|trans }} - {{ entity_label_key|trans }}
 {% endblock %}
 
 {% block main %}
     <div class="class-selection-container">
         <div class="selection-header">
-            <h2>{{ 'class_selection.title'|trans({'%entity%': entity_label}) }}</h2>
+            <h2>{{ 'class_selection.title'|trans({'%entity%': entity_label_key|trans}) }}</h2>
             <p class="text-muted">{{ 'class_selection.description'|trans }}</p>
         </div>
 
@@ -36,7 +36,7 @@
                             <i class="fa fa-calendar"></i> {{ 'form.year'|trans }}: {{ classe.annee }}
                         </p>
                         <p class="class-count">
-                            {{ 'class_selection.items_count'|trans({'%count%': count, '%entity%': entity_label}) }}
+                            {{ 'class_selection.items_count'|trans({'%count%': count, '%entity%': entity_label_key|trans}) }}
                         </p>
                     </div>
 

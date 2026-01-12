@@ -72,7 +72,7 @@ class ClassSelectionController extends AbstractController
 
         return $this->render('admin/class_selection.html.twig', [
             'classes' => $classesWithStats,
-            'entity_label' => $this->translator->trans($entityLabel, [], 'messages'),
+            'entity_label_key' => $entityLabel,
             'entity_name' => $entityName,
         ]);
     }
