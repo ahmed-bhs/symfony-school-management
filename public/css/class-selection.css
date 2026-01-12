@@ -54,12 +54,44 @@
 
 /* Card Header */
 .class-card-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+}
+
+/* Color Variations - Each class gets a unique color based on ID */
+.class-card-color-0 .class-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.class-card-color-1 .class-card-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.class-card-color-2 .class-card-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.class-card-color-3 .class-card-header {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.class-card-color-4 .class-card-header {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.class-card-color-5 .class-card-header {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+}
+
+.class-card-color-6 .class-card-header {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.class-card-color-7 .class-card-header {
+    background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
 }
 
 .class-icon {
@@ -78,12 +110,21 @@
 
 .class-badge .badge {
     background: white;
-    color: #667eea;
     font-size: 1.1rem;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
 }
+
+/* Badge colors matching card headers */
+.class-card-color-0 .class-badge .badge { color: #667eea; }
+.class-card-color-1 .class-badge .badge { color: #f5576c; }
+.class-card-color-2 .class-badge .badge { color: #00f2fe; }
+.class-card-color-3 .class-badge .badge { color: #38f9d7; }
+.class-card-color-4 .class-badge .badge { color: #fa709a; }
+.class-card-color-5 .class-badge .badge { color: #30cfd0; }
+.class-card-color-6 .class-badge .badge { color: #a8edea; }
+.class-card-color-7 .class-badge .badge { color: #ff9a56; }
 
 /* Card Body */
 .class-card-body {
@@ -111,6 +152,16 @@
     color: #667eea;
 }
 
+/* Calendar icon colors matching card headers */
+.class-card-color-0 .class-year i { color: #667eea; }
+.class-card-color-1 .class-year i { color: #f5576c; }
+.class-card-color-2 .class-year i { color: #00f2fe; }
+.class-card-color-3 .class-year i { color: #38f9d7; }
+.class-card-color-4 .class-year i { color: #fa709a; }
+.class-card-color-5 .class-year i { color: #30cfd0; }
+.class-card-color-6 .class-year i { color: #a8edea; }
+.class-card-color-7 .class-year i { color: #ff9a56; }
+
 .class-count {
     color: #495057;
     font-size: 1rem;
@@ -128,7 +179,6 @@
 }
 
 .view-link {
-    color: #667eea;
     font-weight: 500;
     font-size: 0.95rem;
     display: flex;
@@ -137,6 +187,16 @@
     gap: 0.5rem;
     transition: all 0.3s ease;
 }
+
+/* View link colors matching card headers */
+.class-card-color-0 .view-link { color: #667eea; }
+.class-card-color-1 .view-link { color: #f5576c; }
+.class-card-color-2 .view-link { color: #00f2fe; }
+.class-card-color-3 .view-link { color: #38f9d7; }
+.class-card-color-4 .view-link { color: #fa709a; }
+.class-card-color-5 .view-link { color: #30cfd0; }
+.class-card-color-6 .view-link { color: #a8edea; }
+.class-card-color-7 .view-link { color: #ff9a56; }
 
 .class-card:hover .view-link {
     gap: 0.8rem;

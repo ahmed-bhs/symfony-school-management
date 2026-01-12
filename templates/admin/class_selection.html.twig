@@ -16,12 +16,13 @@
                 {% set classe = item.classe %}
                 {% set count = item.count %}
 
+                {% set colorIndex = classe.id % 8 %}
                 <a href="{{ ea_url()
                     .setController('App\\Controller\\Admin\\' ~ entity_name ~ 'CrudController')
                     .setAction('index')
                     .set('filters[classe][comparison]', '=')
                     .set('filters[classe][value]', classe.id)
-                }}" class="class-card">
+                }}" class="class-card class-card-color-{{ colorIndex }}">
                     <div class="class-card-header">
                         <div class="class-icon">
                             <i class="fa fa-graduation-cap"></i>
