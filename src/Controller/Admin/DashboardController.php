@@ -50,6 +50,7 @@ class DashboardController extends AbstractDashboardController
         return Assets::new()
             ->addCssFile('css/professional-theme.css')
             ->addCssFile('css/enhanced-theme.css')
+            ->addCssFile('css/class-selection.css')
             ->addJsFile('js/admin-custom.js')
             ->addJsFile('js/enhanced-interactions.js')
             ->addJsFile('js/locale-switcher.js');
@@ -63,7 +64,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('menu.dashboard', 'fa fa-chart-line');
 
         yield MenuItem::section('menu.students_classes');
-        yield MenuItem::linkToCrud('entity.students', 'fa fa-user-graduate', Etudiant::class)
+        yield MenuItem::linkToRoute('entity.students', 'fa fa-user-graduate', 'admin_class_selection_students')
             ->setBadge($globalStats['totalEtudiants'], 'info');
         yield MenuItem::linkToCrud('entity.classes', 'fa fa-school', Classe::class)
             ->setBadge($globalStats['totalClasses'], 'success');
@@ -73,14 +74,14 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('menu.teachers');
         yield MenuItem::linkToCrud('entity.professors', 'fa fa-chalkboard-teacher', Prof::class)
             ->setBadge($globalStats['totalProfesseurs'], 'info');
-        yield MenuItem::linkToCrud('entity.sessions', 'fa fa-calendar-alt', Seance::class)
+        yield MenuItem::linkToRoute('entity.sessions', 'fa fa-calendar-alt', 'admin_class_selection_sessions')
             ->setBadge($globalStats['totalSeances'], 'primary');
 
         yield MenuItem::section('menu.evaluations');
-        yield MenuItem::linkToCrud('entity.evaluations', 'fa fa-clipboard-check', Evaluation::class)
+        yield MenuItem::linkToRoute('entity.evaluations', 'fa fa-clipboard-check', 'admin_class_selection_evaluations')
             ->setBadge($globalStats['totalEvaluations'], 'success');
-        yield MenuItem::linkToCrud('entity.grades', 'fa fa-star', Note::class);
-        yield MenuItem::linkToCrud('entity.exercises', 'fa fa-tasks', Exercice::class);
+        yield MenuItem::linkToRoute('entity.grades', 'fa fa-star', 'admin_class_selection_grades');
+        yield MenuItem::linkToRoute('entity.exercises', 'fa fa-tasks', 'admin_class_selection_exercises');
 
         yield MenuItem::section();
         yield MenuItem::linkToUrl('menu.logout', 'fa fa-sign-out-alt', '/logout');

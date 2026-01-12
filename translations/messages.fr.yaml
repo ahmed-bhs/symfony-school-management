@@ -46,6 +46,15 @@ grades:
   top_students: 'Top 5 Étudiants'
   no_grades: "Aucune note n'a encore été enregistrée."
 
+class_selection:
+  select_class: 'Sélectionner une classe'
+  title: 'Sélectionner une classe pour voir %entity%'
+  description: 'Choisissez une classe pour afficher uniquement les éléments associés'
+  items_count: '%count% %entity%'
+  view: 'Voir'
+  view_all: 'Voir tous sans filtre'
+  no_classes: 'Aucune classe disponible'
+
 classes:
   most_populated: 'Classes les plus nombreuses'
   students_count: 'élèves'

@@ -46,6 +46,15 @@ grades:
   top_students: 'أفضل 5 طلاب'
   no_grades: 'لم يتم تسجيل أي درجات بعد.'
 
+class_selection:
+  select_class: 'اختر فصلاً'
+  title: 'اختر فصلاً لعرض %entity%'
+  description: 'اختر فصلاً لعرض العناصر المرتبطة فقط'
+  items_count: '%count% %entity%'
+  view: 'عرض'
+  view_all: 'عرض الكل بدون تصفية'
+  no_classes: 'لا توجد فصول متاحة'
+
 classes:
   most_populated: 'الفصول الأكثر عدداً'
   students_count: 'طلاب'

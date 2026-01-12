@@ -46,6 +46,15 @@ grades:
   top_students: 'Top 5 Students'
   no_grades: 'No grades have been recorded yet.'
 
+class_selection:
+  select_class: 'Select a class'
+  title: 'Select a class to view %entity%'
+  description: 'Choose a class to display only related items'
+  items_count: '%count% %entity%'
+  view: 'View'
+  view_all: 'View all without filter'
+  no_classes: 'No classes available'
+
 classes:
   most_populated: 'Most Populated Classes'
   students_count: 'students'
