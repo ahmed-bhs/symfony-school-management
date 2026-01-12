@@ -14,6 +14,7 @@ This project is a **complete modernization** of an [8-year-old Symfony 3.1 appli
 ## 📖 Table of Contents
 
 - [About](#-about)
+- [Screenshots](#-screenshots)
 - [Features](#-features)
 - [Technology Stack](#-technology-stack)
 - [Prerequisites](#-prerequisites)
@@ -46,6 +47,76 @@ This School Management System is designed as an **educational project** for stud
 ✅ **Well-documented** - Comprehensive documentation and comments
 ✅ **Docker-ready** - Easy setup with Docker containers
 ✅ **Migration example** - Learn how to migrate legacy applications
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+### 🎨 Modern & Professional Interface
+
+<table>
+<tr>
+<td width="50%">
+
+#### 📊 Dashboard
+Professional dashboard with real-time statistics, charts, and performance tracking.
+
+<img src="public/images/screenshots/01-dashboard.png" alt="Dashboard" width="100%" />
+
+</td>
+<td width="50%">
+
+#### 📚 Class Selection
+Elegant class selection interface with colorful cards and student counts.
+
+<img src="public/images/screenshots/02-class-selection.png" alt="Class Selection" width="100%" />
+
+</td>
+</tr>
+</table>
+
+### ✨ Mass Grade Entry System
+
+<table>
+<tr>
+<td width="33%">
+
+#### 📋 Evaluation Selection
+Choose evaluation with detailed information cards.
+
+<img src="public/images/screenshots/03-evaluation-selection.png" alt="Evaluation Selection" width="100%" />
+
+</td>
+<td width="33%">
+
+#### ✏️ Grade Entry
+Bulk grade entry with real-time statistics and keyboard navigation.
+
+<img src="public/images/screenshots/04-grade-entry.png" alt="Grade Entry" width="100%" />
+
+</td>
+<td width="33%">
+
+#### 👥 Student List
+Comprehensive student management with filtering and search.
+
+<img src="public/images/screenshots/05-student-list.png" alt="Student List" width="100%" />
+
+</td>
+</tr>
+</table>
+
+**✨ Key UI Features:**
+- 🎨 Modern gradient designs
+- 📊 Real-time statistics updates
+- ⌨️ Advanced keyboard navigation (Enter/↑/↓)
+- 🌍 Multi-language support (FR/EN/AR)
+- 📱 Fully responsive design
+- 🎯 Professional animations & transitions
+
+</div>
 
 ---
 
