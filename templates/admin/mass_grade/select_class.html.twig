@@ -1,28 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ app.request.locale }}" dir="{{ app.request.locale == 'ar' ? 'rtl' : 'ltr' }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ 'mass_grade.select_class_title'|trans }}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/class-selection.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mass-grade-entry.css') }}">
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('admin') }}">
-            <i class="fa fa-arrow-left"></i> {{ 'action.back'|trans }}
-        </a>
-        <span class="navbar-text text-white">
-            {{ 'app.name'|trans }}
-        </span>
-    </nav>
+{% extends '@EasyAdmin/layout.html.twig' %}
 
-    <div class="container-fluid mt-4">
-        <h1 class="mb-4">
-            <i class="fa fa-edit"></i> {{ 'mass_grade.select_class_title'|trans }}
-        </h1>
+{% block content_title %}
+    <i class="fa fa-edit"></i> {{ 'mass_grade.select_class_title'|trans }}
+{% endblock %}
+
+{% block main %}
     <div class="class-selection-container">
         <div class="selection-header">
             <h2>{{ 'mass_grade.select_class_description'|trans }}</h2>
@@ -66,9 +48,4 @@
             {% endfor %}
         </div>
     </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
