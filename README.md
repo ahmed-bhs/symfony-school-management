@@ -5,6 +5,18 @@
 [![EasyAdmin 4](https://img.shields.io/badge/EasyAdmin-4-blue.svg?style=flat-square)](https://github.com/EasyCorp/EasyAdminBundle)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 
+<div align="center">
+
+### ☕ Support This Project
+
+If this project helped you learn Symfony or saved you time, consider buying me a coffee!
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Support-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/w6ZhBSGX2)
+
+*Your support helps maintain this educational project and create more learning resources!* ❤️
+
+</div>
+
 > **📚 Educational Project** - A modern school management system built with Symfony 7.4 and EasyAdmin 4. Perfect for learning PHP, Symfony framework, and modern web development practices.
 
 This project is a **complete modernization** of an [8-year-old Symfony 3.1 application](https://github.com/ahmed-bhs/old-school-project), migrated to Symfony 7.4 with best practices and modern architecture.
