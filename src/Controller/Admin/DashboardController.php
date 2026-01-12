@@ -82,8 +82,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('entity.evaluations', 'fa fa-clipboard-check', 'admin_class_selection_evaluations')
             ->setBadge($globalStats['totalEvaluations'], 'success');
         yield MenuItem::linkToRoute('entity.grades', 'fa fa-star', 'admin_class_selection_grades');
-        yield MenuItem::linkToRoute('menu.mass_grade_entry', 'fa fa-edit', 'admin_mass_grade_select_class')
-            ->setBadge('NEW', 'warning');
         yield MenuItem::linkToRoute('entity.exercises', 'fa fa-tasks', 'admin_class_selection_exercises');
 
         yield MenuItem::section();
