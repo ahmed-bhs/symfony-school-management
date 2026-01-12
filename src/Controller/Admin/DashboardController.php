@@ -17,11 +17,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
-        private DashboardStatsService $statsService
+        private DashboardStatsService $statsService,
+        private TranslatorInterface $translator
     ) {
     }
 
@@ -38,10 +40,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('app.name')
+            ->setTitle($this->translator->trans('app.name', [], 'messages'))
             ->setFaviconPath('favicon.ico')
-            ->setLocales(['fr' => 'Français', 'en' => 'English', 'ar' => 'العربية'])
-            ->setTranslationDomain('messages');
+            ->setLocales(['fr' => 'Français', 'en' => 'English', 'ar' => 'العربية']);
     }
 
     public function configureAssets(): Assets
