@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" dir="{{ app.request.locale == 'ar' ? 'rtl' : 'ltr' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block page_title_tag %}{{ 'mass_grade.enter_grades_title'|trans }}{% endblock %} - {{ 'app.name'|trans }}</title>
+
+    {# EasyAdmin CSS #}
+    <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    {# Custom CSS #}
+    <link rel="stylesheet" href="{{ asset('css/professional-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/enhanced-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/class-selection.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mass-grade-entry.css') }}">
+</head>
+<body id="ea-body">
+    <div id="wrapper">
+        {# Sidebar #}
+        <aside id="sidebar" class="sidebar">
+            <header class="sidebar-header">
+                <a class="sidebar-logo" href="{{ path('admin') }}">
+                    <span class="sidebar-logo-text">{{ 'app.name'|trans }}</span>
+                </a>
+            </header>
+
+            <div class="sidebar-menu">
+                <nav class="menu">
+                    <a href="{{ path('admin') }}" class="menu-item">
+                        <i class="fa fa-home"></i>
+                        <span class="menu-item-label">{{ 'menu.dashboard'|trans }}</span>
+                    </a>
+                    <a href="{{ path('admin') }}?crudController=App\\Controller\\Admin\\NoteCrudController" class="menu-item">
+                        <i class="fa fa-star"></i>
+                        <span class="menu-item-label">{{ 'entity.grades'|trans }}</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        {# Main content #}
+        <div id="main">
+            <div class="content-wrapper">
+                <header class="content-header">
+                    <div class="content-header-title">
+                        <h1>{% block content_title %}Page Title{% endblock %}</h1>
+                    </div>
+
+                    <div class="content-header-actions">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                {{ app.request.locale|upper }}
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="?_locale=fr">Français</a>
+                                <a class="dropdown-item" href="?_locale=en">English</a>
+                                <a class="dropdown-item" href="?_locale=ar">العربية</a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="content">
+                    {% block main %}{% endblock %}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    {# EasyAdmin JS #}
+    <script src="{{ asset('bundles/easyadmin/app.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,4 +1,4 @@
-{% extends '@EasyAdmin/layout.html.twig' %}
+{% extends 'admin/mass_grade/base.html.twig' %}
 
 {% block content_title %}
     <i class="fa fa-clipboard-check"></i> {{ 'mass_grade.select_evaluation_title'|trans }}
@@ -6,7 +6,7 @@
 
 {% block main %}
     <div class="mb-4">
-        <a href="{{ ea_url().setRoute('admin_mass_grade_select_class') }}" class="btn btn-secondary">
+        <a href="{{ path('admin_mass_grade_select_class') }}" class="btn btn-secondary">
             <i class="fa fa-arrow-left"></i> {{ 'action.back'|trans }}
         </a>
     </div>
