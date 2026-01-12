@@ -1,45 +1,385 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content_title %}
-    <h1 class="title">Bienvenue dans le système de gestion scolaire</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="title">
+            <i class="fas fa-chart-line"></i> Tableau de bord
+        </h1>
+        <div class="text-muted">
+            <i class="far fa-calendar-alt"></i> {{ 'now'|date('d/m/Y H:i') }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block main %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+    {# Statistiques globales #}
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
-                    <h2>Tableau de bord</h2>
-                    <p>Utilisez le menu de gauche pour accéder aux différentes sections du système de gestion scolaire.</p>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Étudiants
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ stats.global.totalEtudiants }}
+                            </div>
+                            <div class="text-xs text-muted mt-1">
+                                <span class="badge badge-success">{{ stats.etudiants.pourcentageActifs }}% actifs</span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-graduate fa-3x text-primary opacity-25"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                            <div class="card bg-primary text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">👨‍🎓 Étudiants</h5>
-                                    <p class="card-text">Gérer les étudiants et leurs informations</p>
-                                </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Classes
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ stats.global.totalClasses }}
+                            </div>
+                            <div class="text-xs text-muted mt-1">
+                                Moyenne: {{ stats.classes.moyenneEtudiantsParClasse }} élèves/classe
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card bg-success text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">👨‍🏫 Professeurs</h5>
-                                    <p class="card-text">Gérer les professeurs et leurs séances</p>
-                                </div>
+                        <div class="col-auto">
+                            <i class="fas fa-school fa-3x text-success opacity-25"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Professeurs
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ stats.global.totalProfesseurs }}
+                            </div>
+                            <div class="text-xs text-muted mt-1">
+                                {{ stats.global.totalSeances }} séances programmées
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card bg-info text-white">
-                                <div class="card-body">
-                                    <h5 class="card-title">📊 Évaluations</h5>
-                                    <p class="card-text">Gérer les évaluations et notes</p>
-                                </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chalkboard-teacher fa-3x text-info opacity-25"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Absences
                             </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ stats.absences.totalAbsences }}
+                            </div>
+                            <div class="text-xs text-muted mt-1">
+                                Taux: {{ stats.absences.tauxAbsenteisme }}% des étudiants
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar-times fa-3x text-warning opacity-25"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {# Ligne 2: Graphiques et statistiques #}
+    <div class="row mb-4">
+        {# Notes - Distribution #}
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-chart-bar"></i> Distribution des Notes
+                    </h6>
+                    <div class="badge badge-primary badge-pill">
+                        Moyenne: {{ stats.notes.moyenneGenerale }}/20
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% set dist = stats.notes.distribution %}
+                    {% set total = dist.total %}
+
+                    {% if total > 0 %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-success">⭐ Excellent (≥16)</span>
+                                <strong>{{ dist.excellent }}</strong>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-success" style="width: {{ (dist.excellent / total * 100)|round }}%"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-primary">👍 Bien (14-16)</span>
+                                <strong>{{ dist.bien }}</strong>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-primary" style="width: {{ (dist.bien / total * 100)|round }}%"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-info">✓ Assez bien (12-14)</span>
+                                <strong>{{ dist.assez_bien }}</strong>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-info" style="width: {{ (dist.assez_bien / total * 100)|round }}%"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-warning">~ Passable (10-12)</span>
+                                <strong>{{ dist.passable }}</strong>
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar bg-warning" style="width: {{ (dist.passable / total * 100)|round }}%"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="text-danger">✗ Insuffisant (&lt;10)</span>
+                                <strong>{{ dist.insuffisant }}</strong>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" style="width: {{ (dist.insuffisant / total * 100)|round }}%"></div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p class="text-muted text-center my-5">
+                            <i class="fas fa-chart-bar fa-3x mb-3 d-block"></i>
+                            Aucune note n'a encore été enregistrée.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {# Top 5 Étudiants #}
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">
+                        <i class="fas fa-trophy"></i> Top 5 Étudiants
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for etudiant in stats.notes.topEtudiants %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <span class="badge badge-{{ loop.index == 1 ? 'warning' : (loop.index == 2 ? 'secondary' : (loop.index == 3 ? 'danger' : 'light')) }} mr-2">
+                                        #{{ loop.index }}
+                                    </span>
+                                    <strong>{{ etudiant.prenom }} {{ etudiant.nom }}</strong>
+                                </div>
+                                <span class="badge badge-success badge-pill">{{ etudiant.moyenne|round(2) }}/20</span>
+                            </div>
+                        {% else %}
+                            <p class="text-muted text-center">Aucune note disponible</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Ligne 3: Classes et Absences #}
+    <div class="row mb-4">
+        {# Top 5 Classes #}
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-users"></i> Classes les plus nombreuses
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for classe in stats.classes.topClasses %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <strong>{{ classe.description }}</strong>
+                                    <small class="text-muted d-block">{{ classe.annee }}</small>
+                                </div>
+                                <span class="badge badge-primary badge-pill">{{ classe.nb_etudiants }} élèves</span>
+                            </div>
+                        {% else %}
+                            <p class="text-muted text-center">Aucune classe</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Top Absences #}
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-warning">
+                        <i class="fas fa-exclamation-triangle"></i> Étudiants les plus absents
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for absence in stats.absences.topAbsences %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <strong>{{ absence.prenom }} {{ absence.nom }}</strong>
+                                </div>
+                                <span class="badge badge-{{ absence.total_absences > 20 ? 'danger' : 'warning' }} badge-pill">
+                                    {{ absence.total_absences }} absences
+                                </span>
+                            </div>
+                        {% else %}
+                            <p class="text-muted text-center">Aucune absence enregistrée</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Ligne 4: Activité récente #}
+    <div class="row mb-4">
+        {# Dernières évaluations #}
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info">
+                        <i class="fas fa-clipboard-list"></i> Dernières Évaluations
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for eval in stats.activity.recentEvaluations %}
+                            <div class="list-group-item px-0">
+                                <div class="d-flex justify-content-between">
+                                    <strong>{{ eval.nom }}</strong>
+                                    <small class="text-muted">{{ eval.date|date('d/m/Y') }}</small>
+                                </div>
+                                <small class="text-muted">{{ eval.classe }}</small>
+                            </div>
+                        {% else %}
+                            <p class="text-muted text-center">Aucune évaluation récente</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Prochaines séances #}
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">
+                        <i class="fas fa-calendar-check"></i> Prochaines Séances
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        {% for seance in stats.activity.upcomingSeances %}
+                            <div class="list-group-item px-0">
+                                <div class="d-flex justify-content-between">
+                                    <strong>{{ seance.description }}</strong>
+                                    <small class="text-muted">
+                                        {{ seance.date|date('d/m') }}
+                                        {% if seance.debut %}
+                                            - {{ seance.debut|date('H:i') }}
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                <small class="text-muted">
+                                    {{ seance.classe }}
+                                    {% if seance.prof_nom %}
+                                        - Prof. {{ seance.prof_prenom }} {{ seance.prof_nom }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                        {% else %}
+                            <p class="text-muted text-center">Aucune séance programmée</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Ligne 5: Statistiques professeurs #}
+    <div class="row mb-4">
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-chart-pie"></i> Professeurs les plus actifs
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for prof in stats.professeurs.topProfs %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ prof.prenom }} {{ prof.nom }}</h6>
+                                        <p class="card-text">
+                                            <span class="badge badge-info">{{ prof.competences }}</span>
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">Séances</small>
+                                            <span class="badge badge-primary badge-pill">{{ prof.nb_seances }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .border-left-primary {
+            border-left: 0.25rem solid #4e73df !important;
+        }
+        .border-left-success {
+            border-left: 0.25rem solid #1cc88a !important;
+        }
+        .border-left-info {
+            border-left: 0.25rem solid #36b9cc !important;
+        }
+        .border-left-warning {
+            border-left: 0.25rem solid #f6c23e !important;
+        }
+        .opacity-25 {
+            opacity: 0.25;
+        }
+        .shadow {
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+        }
+        .text-xs {
+            font-size: 0.7rem;
+        }
+    </style>
 {% endblock %}

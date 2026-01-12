@@ -29,7 +29,7 @@ newgrp docker
 
 #### Sur Fedora/RHEL
 ```bash
-sudo dnf install docker docker-compose
+sudo dnf install docker docker compose
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
@@ -52,11 +52,11 @@ Docker Compose est généralement inclus avec Docker Desktop. Si ce n'est pas le
 
 ```bash
 # Linux
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker compose
+sudo chmod +x /usr/local/bin/docker compose
 
 # Vérifier l'installation
-docker-compose --version
+docker compose --version
 ```
 
 ## 🚀 Lancement du Projet
@@ -143,7 +143,7 @@ make shell          # Ouvrir un terminal
 
 ### Docker n'est pas installé
 ```
-Error: docker-compose: command not found
+Error: docker compose: command not found
 ```
 → Installez Docker en suivant les instructions ci-dessus
 
@@ -151,7 +151,7 @@ Error: docker-compose: command not found
 ```
 Error: port is already allocated
 ```
-→ Modifiez les ports dans `docker-compose.yml`:
+→ Modifiez les ports dans `docker compose.yml`:
 ```yaml
 ports:
   - "8081:80"  # Changez 8080 en 8081
@@ -166,10 +166,10 @@ chmod +x bin/console start.sh
 ### MySQL ne démarre pas
 ```bash
 # Voir les logs
-docker-compose logs db
+docker compose logs db
 
 # Redémarrer MySQL
-docker-compose restart db
+docker compose restart db
 ```
 
 ## 📚 Documentation

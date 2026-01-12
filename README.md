@@ -1,280 +1,540 @@
-# 🎓 Système de Gestion Scolaire - Symfony 7.4 + EasyAdmin
+# 🎓 School Management System - Symfony 7.4 + EasyAdmin
 
-Système de gestion scolaire moderne migré de Symfony 3.1 vers Symfony 7.4 avec interface d'administration EasyAdmin.
+[![Symfony 7.4](https://img.shields.io/badge/Symfony-7.4-black.svg?style=flat-square&logo=symfony)](https://symfony.com)
+[![PHP 8.3](https://img.shields.io/badge/PHP-8.3-777BB4.svg?style=flat-square&logo=php)](https://www.php.net)
+[![EasyAdmin 4](https://img.shields.io/badge/EasyAdmin-4-blue.svg?style=flat-square)](https://github.com/EasyCorp/EasyAdminBundle)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](LICENSE)
 
-## 📋 Fonctionnalités
+> **📚 Educational Project** - A modern school management system built with Symfony 7.4 and EasyAdmin 4. Perfect for learning PHP, Symfony framework, and modern web development practices.
 
-- ✅ Gestion des étudiants
-- ✅ Gestion des professeurs
-- ✅ Gestion des classes
-- ✅ Gestion des notes et évaluations
-- ✅ Suivi des absences
-- ✅ Gestion des séances et emploi du temps
-- ✅ Gestion des exercices
-- ✅ Interface d'administration moderne avec EasyAdmin 4
-- ✅ Authentification sécurisée
+This project is a **complete modernization** of an [8-year-old Symfony 3.1 application](https://github.com/ahmed-bhs/old-school-project), migrated to Symfony 7.4 with best practices and modern architecture.
 
-## 🚀 Installation avec Docker
+---
 
-### Prérequis
-- Docker
-- Docker Compose
+## 📖 Table of Contents
 
-### Étapes d'installation
+- [About](#-about)
+- [Features](#-features)
+- [Technology Stack](#-technology-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Learning Objectives](#-learning-objectives)
+- [Migration History](#-migration-history)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-1. **Cloner le projet** (si ce n'est pas déjà fait)
+---
+
+## 🎯 About
+
+This School Management System is designed as an **educational project** for students learning:
+- ✅ Modern PHP development (PHP 8.3+)
+- ✅ Symfony framework (version 7.4)
+- ✅ Database design and Doctrine ORM
+- ✅ Admin panel development with EasyAdmin
+- ✅ Multi-language applications (i18n)
+- ✅ Docker containerization
+- ✅ Modern web development practices
+
+### What Makes This Project Special?
+
+✅ **Real-world application** - Not just a tutorial, but a functional school management system
+✅ **Modern architecture** - Follows Symfony 7.4 best practices
+✅ **Multilingual** - Full support for French, English, and Arabic
+✅ **Professional UI** - Clean, modern interface with custom themes
+✅ **Well-documented** - Comprehensive documentation and comments
+✅ **Docker-ready** - Easy setup with Docker containers
+✅ **Migration example** - Learn how to migrate legacy applications
+
+---
+
+## ✨ Features
+
+### Core Functionality
+
+- **👥 Student Management**
+  - Complete student profiles (name, birth date, address, parents info)
+  - Class assignment
+  - Attendance tracking
+  - Grade management
+
+- **📚 Class Management**
+  - Class organization by year
+  - Student enrollment
+  - Session scheduling
+
+- **👨‍🏫 Professor Management**
+  - Professor profiles with skills and competencies
+  - Session assignments
+  - Evaluation creation
+
+- **📅 Session Management**
+  - Weekly schedule management
+  - Class and professor assignments
+  - Time slot organization
+
+- **📝 Evaluation & Grades**
+  - Create evaluations with coefficients
+  - Record student grades
+  - Automatic grade calculations
+  - Performance tracking
+
+- **📊 Dashboard & Statistics**
+  - Real-time statistics
+  - Student performance charts
+  - Absence tracking
+  - Top performers display
+
+### Technical Features
+
+- **🌍 Internationalization (i18n)**
+  - French (Français)
+  - English
+  - Arabic (العربية) with RTL support
+
+- **🎨 Modern UI/UX**
+  - Professional theme
+  - Responsive design
+  - Interactive charts and graphs
+  - Full-width datatables
+  - Smooth animations
+
+---
+
+## 🛠 Technology Stack
+
+### Backend
+- **Symfony 7.4** - PHP framework
+- **PHP 8.3** - Programming language
+- **Doctrine ORM** - Database abstraction
+- **EasyAdmin 4** - Admin panel generator
+- **MySQL 8** - Database
+
+### Frontend
+- **Twig** - Template engine
+- **Bootstrap 5** - UI framework
+- **Chart.js** - Data visualization
+- **Custom CSS** - Professional theming
+
+### DevOps
+- **Docker & Docker Compose** - Containerization
+- **Castor** - Task runner (modern alternative to Makefile)
+- **PHP-FPM & Nginx** - Web server
+
+---
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Docker** (version 20.10 or higher)
+- **Docker Compose** (version 2.0 or higher)
+- **Git**
+
+**OR** if you prefer local development:
+
+- **PHP 8.3 or higher**
+- **Composer 2.x**
+- **MySQL 8.0 or higher**
+
+---
+
+## 🚀 Installation
+
+### Option 1: Docker Installation (Recommended)
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/school-management-symfony.git
+   cd school-management-symfony
+   ```
+
+2. **Start Docker containers**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Install dependencies**
+   ```bash
+   docker-compose exec php composer install
+   ```
+
+4. **Create database and run migrations**
+   ```bash
+   docker-compose exec php php bin/console doctrine:database:create --if-not-exists
+   docker-compose exec php php bin/console doctrine:migrations:migrate -n
+   ```
+
+5. **Load demo data (optional)**
+   ```bash
+   docker-compose exec php php bin/console doctrine:fixtures:load -n
+   ```
+
+6. **Access the application**
+   - Application: http://localhost:8080
+   - Admin panel: http://localhost:8080/admin
+   - PhpMyAdmin: http://localhost:8081 (user: `root`, password: `root`)
+
+### Option 2: Using Castor (Task Runner)
+
 ```bash
-cd /home/ahmed/Projets/old-school-project
-```
-
-2. **Démarrer les conteneurs Docker**
-```bash
-docker-compose up -d
-```
-
-3. **Installer les dépendances Composer**
-```bash
-docker-compose exec php composer install
-```
-
-4. **Créer la base de données et les tables**
-```bash
-docker-compose exec php php bin/console doctrine:database:create --if-not-exists
-docker-compose exec php php bin/console make:migration
-docker-compose exec php php bin/console doctrine:migrations:migrate -n
-```
-
-5. **Créer un utilisateur administrateur**
-```bash
-# Hasher le mot de passe
-docker-compose exec php php bin/console security:hash-password
-# Puis insérer manuellement dans la base via PhpMyAdmin ou SQL
-```
-
-6. **Vider le cache**
-```bash
-docker-compose exec php php bin/console cache:clear
-```
-
-## 🌐 Accès à l'application
-
-- **Application web**: http://localhost:8080
-- **Interface admin**: http://localhost:8080/admin
-- **Connexion**: http://localhost:8080/login
-- **PhpMyAdmin**: http://localhost:8081
-  - Serveur: `db`
-  - Utilisateur: `root`
-  - Mot de passe: `root`
-
-### Identifiants par défaut
-Vous devez créer un utilisateur administrateur après l'installation.
-
-## 📦 Services Docker
-
-- **nginx**: Serveur web (port 8080)
-- **php**: PHP 8.4-FPM
-- **db**: MySQL 8.0 (port 3306)
-- **phpmyadmin**: Interface de gestion MySQL (port 8081)
-
-## 🛠️ Commandes utiles
-
-Ce projet propose **3 façons** de gérer les tâches:
-
-### Option 1: Castor (recommandé) 🎯
-
-Castor est un task runner moderne pour PHP. Installez les dépendances puis utilisez:
-
-```bash
-# Lister toutes les commandes disponibles
-vendor/bin/castor
-
-# Build complet du projet
+# Build and start everything
 vendor/bin/castor build
 
-# Démarrer/arrêter
+# Initialize database with fixtures
+vendor/bin/castor db:init
+
+# Access the app at http://localhost:8080/admin
+```
+
+### Option 3: Local Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/school-management-symfony.git
+   cd school-management-symfony
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   ```
+
+3. **Configure environment**
+   ```bash
+   cp .env .env.local
+   ```
+
+   Edit `.env.local` and configure your database:
+   ```env
+   DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/school_db?serverVersion=8.0"
+   ```
+
+4. **Create database and run migrations**
+   ```bash
+   php bin/console doctrine:database:create
+   php bin/console doctrine:migrations:migrate
+   ```
+
+5. **Load demo data (optional)**
+   ```bash
+   php bin/console doctrine:fixtures:load
+   ```
+
+6. **Start development server**
+   ```bash
+   symfony server:start
+   # OR
+   php -S localhost:8000 -t public
+   ```
+
+---
+
+## 📖 Usage
+
+### Quick Start
+
+After installation, you can:
+
+1. **Access the admin panel** at `/admin`
+2. **Switch languages** using the language selector (top-right corner)
+3. **Browse entities**: Students, Classes, Professors, Sessions, Evaluations, Grades, Absences
+
+### Common Commands
+
+#### Using Castor (Recommended)
+
+```bash
+# List all available commands
+vendor/bin/castor
+
+# Start/stop project
 vendor/bin/castor start
 vendor/bin/castor stop
 vendor/bin/castor restart
 
-# Base de données
-vendor/bin/castor db:init
-vendor/bin/castor db:migrate
-vendor/bin/castor db:reset
+# Database operations
+vendor/bin/castor db:init      # Create database and load fixtures
+vendor/bin/castor db:migrate   # Run migrations
+vendor/bin/castor db:reset     # Reset database
 
-# Cache et logs
-vendor/bin/castor cache
-vendor/bin/castor logs
-
-# Créer un admin
-vendor/bin/castor create-admin
-
-# Autres
-vendor/bin/castor routes
-vendor/bin/castor shell
-vendor/bin/castor test
+# Utilities
+vendor/bin/castor cache        # Clear cache
+vendor/bin/castor logs         # View logs
+vendor/bin/castor shell        # Access PHP container shell
+vendor/bin/castor routes       # List all routes
 ```
 
-### Option 2: Makefile ⚙️
-
-Si vous préférez Make:
+#### Using Symfony Console
 
 ```bash
-# Lister toutes les commandes
-make help
+# Clear cache
+php bin/console cache:clear
 
-# Build complet
-make build
+# Run migrations
+php bin/console doctrine:migrations:migrate
 
-# Démarrer/arrêter
-make start
-make stop
-make restart
-make status
+# Load fixtures (demo data)
+php bin/console doctrine:fixtures:load
 
-# Base de données
-make db-init
-make db-migrate
-make db-reset
+# Debug routes
+php bin/console debug:router
 
-# Cache et utilitaires
-make cache
-make logs
-make routes
-make shell
-
-# Créer un admin
-make create-admin
+# Check translations
+php bin/console debug:translation fr
 ```
 
-### Option 3: Docker Compose direct 🐳
+---
 
-Pour les puristes:
+## 🎓 Learning Objectives
 
-```bash
-# Démarrer les conteneurs
-docker-compose up -d
+This project is designed to help students learn:
 
-# Arrêter les conteneurs
-docker-compose down
+### Symfony Framework
+- ✅ **MVC Architecture** - Model-View-Controller pattern
+- ✅ **Routing** - URL routing and controllers
+- ✅ **Doctrine ORM** - Database interactions and relationships
+- ✅ **Twig Templates** - Template engine
+- ✅ **Dependency Injection** - Service container
+- ✅ **Event System** - Event listeners and subscribers
+- ✅ **Forms** - Form handling and validation
+- ✅ **Security** - Authentication and authorization
 
-# Voir les logs
-docker-compose logs -f
+### EasyAdmin Bundle
+- ✅ **CRUD Generation** - Automatic admin panels
+- ✅ **Field Configuration** - Custom field types
+- ✅ **Actions** - Custom actions and batch operations
+- ✅ **Filters** - Data filtering and search
+- ✅ **Dashboard** - Custom dashboard creation
 
-# Exécuter des commandes
-docker-compose exec php php bin/console
+### Database Design
+- ✅ **Entity Relationships** - OneToMany, ManyToOne, ManyToMany
+- ✅ **Migrations** - Database versioning
+- ✅ **Fixtures** - Sample data generation
+- ✅ **Repositories** - Custom queries and DQL
 
-# Créer une migration
-docker-compose exec php php bin/console make:migration
+### Internationalization
+- ✅ **Translation System** - Multi-language support
+- ✅ **Locale Handling** - Language switching
+- ✅ **RTL Support** - Right-to-left languages (Arabic)
+- ✅ **Domain Separation** - Technical vs business translations
 
-# Exécuter les migrations
-docker-compose exec php php bin/console doctrine:migrations:migrate
+### Modern PHP
+- ✅ **PHP 8.3 Features** - Attributes, typed properties, constructor promotion
+- ✅ **Namespaces** - Code organization
+- ✅ **PSR Standards** - Coding standards
+- ✅ **Composer** - Dependency management
 
-# Vider le cache
-docker-compose exec php php bin/console cache:clear
+### DevOps
+- ✅ **Docker** - Containerization with Docker Compose
+- ✅ **Environment Configuration** - .env files
+- ✅ **Version Control** - Git best practices
+- ✅ **Task Automation** - Castor task runner
+
+---
+
+## 📜 Migration History
+
+### From Symfony 3.1 to 7.4
+
+This project started as a **Symfony 3.1 application** created over **8 years ago** (2017). The original project can be found here: [old-school-project (Symfony 3.1)](https://github.com/ahmed-bhs/old-school-project)
+
+#### Key Migration Changes
+
+**Framework Updates**
+- ✅ Symfony 3.1 → 7.4 (major version jump)
+- ✅ PHP 5.6 → 8.3
+- ✅ Doctrine 2.5 → 3.x
+- ✅ Twig 2.x → 3.x
+
+**Architecture Modernization**
+- ✅ Replaced old `AppBundle` with modern `App` namespace
+- ✅ Migrated from annotations to PHP 8 attributes
+- ✅ Updated service configuration to autowiring
+- ✅ Modernized controller structure
+- ✅ Removed deprecated code and bundles
+
+**UI/UX Improvements**
+- ✅ Replaced custom admin with EasyAdmin 4
+- ✅ Custom professional theme
+- ✅ Responsive design
+- ✅ Modern JavaScript interactions
+- ✅ Chart.js integration for statistics
+
+**New Features**
+- ✅ Multi-language support (FR, EN, AR)
+- ✅ RTL support for Arabic
+- ✅ Enhanced statistics dashboard
+- ✅ Docker containerization
+- ✅ Comprehensive fixtures for demo data
+- ✅ Full-width datatables
+- ✅ Improved UX with 12 items per page
+
+**Developer Experience**
+- ✅ Docker Compose setup
+- ✅ Castor task runner
+- ✅ Improved documentation
+- ✅ Translation best practices guide
+- ✅ Migration documentation
+
+#### Migration Documentation
+
+Detailed migration documentation can be found in:
+- `MIGRATION_COMPLETE.md` - Complete migration guide
+- `TRANSLATION_BEST_PRACTICES.md` - i18n implementation guide
+- `STATUS.md` - Project status and next steps
+
+---
+
+## 📁 Project Structure
+
 ```
-
-## 📊 Structure du projet
-
-```
-.
-├── config/              # Configuration Symfony
-├── docker/             # Configuration Docker
-├── public/             # Point d'entrée web
+school-management-symfony/
+├── config/                 # Configuration files
+│   ├── packages/          # Bundle configurations
+│   └── routes/            # Routing definitions
+├── migrations/            # Database migrations
+├── public/                # Web accessible files
+│   ├── css/              # Custom stylesheets
+│   └── js/               # JavaScript files
 ├── src/
-│   ├── Controller/     # Contrôleurs
-│   │   └── Admin/      # Contrôleurs EasyAdmin
-│   ├── Entity/         # Entités Doctrine
-│   └── Repository/     # Repositories Doctrine
-├── templates/          # Templates Twig
-├── var/                # Cache et logs
-├── docker-compose.yml  # Configuration Docker Compose
-└── Dockerfile          # Image Docker PHP
+│   ├── Controller/       # Controllers
+│   │   └── Admin/        # EasyAdmin CRUD controllers
+│   ├── Entity/           # Doctrine entities
+│   ├── EventListener/    # Event listeners
+│   ├── Repository/       # Database repositories
+│   ├── DataFixtures/     # Demo data fixtures
+│   └── Service/          # Business logic services
+├── templates/            # Twig templates
+│   ├── admin/           # Admin templates
+│   └── bundles/         # Bundle overrides
+├── translations/        # Translation files (i18n)
+│   ├── messages.fr.yaml
+│   ├── messages.en.yaml
+│   ├── messages.ar.yaml
+│   ├── EasyAdminBundle.fr.yaml
+│   ├── EasyAdminBundle.en.yaml
+│   └── EasyAdminBundle.ar.yaml
+├── docker/              # Docker configuration
+├── .env                 # Environment template
+├── composer.json       # PHP dependencies
+├── docker-compose.yml  # Docker services
+├── castor.php          # Castor tasks
+└── README.md          # This file
 ```
 
-## 🔧 Configuration
+---
 
-### Variables d'environnement (.env)
+## 🤝 Contributing
 
-```env
-APP_ENV=dev
-APP_SECRET=ThisTokenIsNotSoSecretChangeIt
-DATABASE_URL="mysql://ecole_user:ecole_pass@db:3306/ecole?serverVersion=8.0&charset=utf8mb4"
-```
+This is an educational project and contributions are welcome! Here's how you can help:
 
-### Modifier le mot de passe de la base de données
+### For Students
 
-1. Éditer `docker-compose.yml`:
-```yaml
-MYSQL_PASSWORD: votre_nouveau_mot_de_passe
-```
+1. **Fork the project**
+2. **Create a feature branch** (`git checkout -b feature/AmazingFeature`)
+3. **Make your changes**
+4. **Commit your changes** (`git commit -m 'Add some AmazingFeature'`)
+5. **Push to the branch** (`git push origin feature/AmazingFeature`)
+6. **Open a Pull Request**
 
-2. Mettre à jour `.env`:
-```env
-DATABASE_URL="mysql://ecole_user:votre_nouveau_mot_de_passe@db:3306/ecole?serverVersion=8.0&charset=utf8mb4"
-```
+### Ideas for Contributions
 
-3. Redémarrer les conteneurs:
-```bash
-docker-compose down -v
-docker-compose up -d
-```
+- 🐛 Fix bugs
+- ✨ Add new features (attendance reports, grade export, etc.)
+- 📝 Improve documentation
+- 🌍 Add more language translations (Spanish, German, etc.)
+- 🎨 Enhance UI/UX
+- ✅ Write tests
+- 📊 Add more statistics/charts
+- 🔐 Improve security features
+- 📱 Mobile responsiveness improvements
 
-## 🎨 Personnalisation EasyAdmin
+### Code Style
 
-Les contrôleurs CRUD se trouvent dans `src/Controller/Admin/`. Vous pouvez personnaliser:
-- Les champs affichés
-- Les filtres
-- Les actions
-- Les permissions
+- Follow PSR-12 coding standards
+- Use meaningful variable and function names
+- Add PHPDoc comments for complex logic
+- Keep functions small and focused
+- Write clean, readable code
 
-Exemple dans `src/Controller/Admin/EtudiantCrudController.php`
+See `CONTRIBUTING.md` for detailed guidelines.
 
-## 🔒 Sécurité
+---
 
-- Authentification par formulaire
-- Mots de passe hashés avec l'algorithme auto de Symfony
-- Protection CSRF activée
-- Accès admin restreint aux utilisateurs avec ROLE_ADMIN
+## 📝 License
 
-## 📝 Notes de migration
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Ce projet a été migré de Symfony 3.1 vers Symfony 7.4:
-- ✅ Architecture modernisée (plus de bundles)
-- ✅ Attributs PHP 8 au lieu d'annotations
-- ✅ EasyAdmin 4 pour l'interface admin
-- ✅ Docker pour le développement
-- ✅ Symfony 7.4 LTS
-- ✅ Toutes les entités migrées (8 entités)
-- ✅ Interface d'administration complète
+---
 
-## 🐛 Dépannage
+## 👨‍💻 Authors
 
-### Problèmes de permissions
-```bash
-docker-compose exec php chown -R www-data:www-data /var/www/var
-docker-compose exec php chmod -R 775 /var/www/var
-```
+- **Ahmed Ben Hassine** - *Initial work (Symfony 3.1, 2017)* - [GitHub](https://github.com/ahmed-bhs)
+- **Ahmed Ben Hassine** - *Migration to Symfony 7.4 (2026)* - [GitHub](https://github.com/ahmed-bhs)
 
-### Cache corrompu
-```bash
-docker-compose exec php php bin/console cache:clear --no-warmup
-docker-compose exec php php bin/console cache:warmup
-```
+---
 
-### Base de données non accessible
-```bash
-# Vérifier que le conteneur DB est démarré
-docker-compose ps
+## 🙏 Acknowledgments
 
-# Voir les logs du conteneur DB
-docker-compose logs db
-```
+- Original project: [old-school-project](https://github.com/ahmed-bhs/old-school-project) (Symfony 3.1, 2017)
+- [Symfony](https://symfony.com) - The PHP framework
+- [EasyAdmin](https://github.com/EasyCorp/EasyAdminBundle) - Admin generator
+- [Doctrine](https://www.doctrine-project.org/) - ORM
+- All contributors and students learning from this project
 
-## 📄 Licence
+---
 
-Propriétaire
+## 📚 Resources for Learning
 
-## 👤 Auteur
+### Official Documentation
+- [Symfony Documentation](https://symfony.com/doc/current/index.html)
+- [EasyAdmin Documentation](https://symfony.com/bundles/EasyAdminBundle/current/index.html)
+- [Doctrine Documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/latest/)
+- [Twig Documentation](https://twig.symfony.com/doc/3.x/)
 
-Ahmed - Système de gestion scolaire
-Migré vers Symfony 7.4 en 2026
+### Tutorials
+- [Symfony Casts](https://symfonycasts.com/) - Video tutorials
+- [SymfonyLab](https://www.symfonylab.fr/) - French tutorials
+- [OpenClassrooms Symfony Course](https://openclassrooms.com/fr/courses/5489656-construisez-un-site-web-a-l-aide-du-framework-symfony)
+
+### Community
+- [Symfony Slack](https://symfony.com/slack)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/symfony)
+- [Reddit r/symfony](https://www.reddit.com/r/symfony/)
+
+---
+
+## 🆘 Support
+
+If you have questions or need help:
+
+1. Check the [documentation](docs/)
+2. Search [existing issues](https://github.com/YOUR_USERNAME/school-management-symfony/issues)
+3. Create a [new issue](https://github.com/YOUR_USERNAME/school-management-symfony/issues/new)
+4. Ask in [Symfony Slack](https://symfony.com/slack)
+
+---
+
+## 🗺 Roadmap
+
+Future improvements planned:
+
+- [ ] Add user authentication system
+- [ ] Implement role-based permissions (RBAC)
+- [ ] Add PDF report generation (student cards, grade reports)
+- [ ] Email notifications (absences, grades)
+- [ ] API endpoints (REST/GraphQL)
+- [ ] Unit and functional tests
+- [ ] Performance optimization
+- [ ] Import/Export features (CSV, Excel)
+- [ ] Attendance QR code scanning
+- [ ] Parent portal
+- [ ] SMS notifications
+
+---
+
+**Made with ❤️ for learning PHP and Symfony**
+
+*Happy Coding! 🚀*

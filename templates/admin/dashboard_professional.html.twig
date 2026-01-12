@@ -1,0 +1,349 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/professional-theme.css') }}">
+{% endblock %}
+
+{% block content_title %}
+    <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 1.875rem; font-weight: 600; color: #111827; margin: 0 0 0.5rem 0;">
+            Tableau de bord
+        </h1>
+        <p style="color: #6b7280; font-size: 0.875rem; margin: 0;">
+            Vue d'ensemble de votre établissement scolaire
+        </p>
+    </div>
+{% endblock %}
+
+{% block main %}
+    {# Global Statistics #}
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card animate-fade-in-up">
+                <div class="stat-card-header">
+                    <div>
+                        <div class="stat-card-title">Étudiants</div>
+                        <div class="stat-card-value">{{ stats.global.totalEtudiants }}</div>
+                        <div class="stat-card-description">
+                            <span class="stat-card-badge">{{ stats.etudiants.pourcentageActifs }}% actifs</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-icon primary">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card animate-fade-in-up">
+                <div class="stat-card-header">
+                    <div>
+                        <div class="stat-card-title">Classes</div>
+                        <div class="stat-card-value">{{ stats.global.totalClasses }}</div>
+                        <div class="stat-card-description">
+                            {{ stats.classes.moyenneEtudiantsParClasse }} élèves/classe
+                        </div>
+                    </div>
+                    <div class="stat-card-icon success">
+                        <i class="fas fa-school"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card animate-fade-in-up">
+                <div class="stat-card-header">
+                    <div>
+                        <div class="stat-card-title">Professeurs</div>
+                        <div class="stat-card-value">{{ stats.global.totalProfesseurs }}</div>
+                        <div class="stat-card-description">
+                            {{ stats.global.totalSeances }} séances programmées
+                        </div>
+                    </div>
+                    <div class="stat-card-icon info">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card animate-fade-in-up">
+                <div class="stat-card-header">
+                    <div>
+                        <div class="stat-card-title">Taux d'absentéisme</div>
+                        <div class="stat-card-value">{{ stats.absences.tauxAbsenteisme }}%</div>
+                        <div class="stat-card-description">
+                            {{ stats.absences.totalAbsences }} absences au total
+                        </div>
+                    </div>
+                    <div class="stat-card-icon warning">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Academic Performance #}
+    <div class="row mb-4">
+        <div class="col-lg-8 mb-4">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-chart-bar" style="color: #6366f1;"></i>
+                        Distribution des notes
+                        <span class="badge-modern primary" style="margin-left: auto;">
+                            Moyenne générale: {{ stats.notes.moyenneGenerale }}/20
+                        </span>
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    {% set dist = stats.notes.distribution %}
+                    {% set total = dist.total %}
+
+                    {% if total > 0 %}
+                        <div class="mb-3">
+                            <div class="progress-label">
+                                <span class="progress-label-text">Excellent (≥16)</span>
+                                <span class="progress-label-value">{{ dist.excellent }} élèves</span>
+                            </div>
+                            <div class="progress-modern">
+                                <div class="progress-bar-modern success" style="width: {{ (dist.excellent / total * 100)|round }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="progress-label">
+                                <span class="progress-label-text">Bien (14-16)</span>
+                                <span class="progress-label-value">{{ dist.bien }} élèves</span>
+                            </div>
+                            <div class="progress-modern">
+                                <div class="progress-bar-modern" style="width: {{ (dist.bien / total * 100)|round }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="progress-label">
+                                <span class="progress-label-text">Assez bien (12-14)</span>
+                                <span class="progress-label-value">{{ dist.assez_bien }} élèves</span>
+                            </div>
+                            <div class="progress-modern">
+                                <div class="progress-bar-modern" style="width: {{ (dist.assez_bien / total * 100)|round }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="progress-label">
+                                <span class="progress-label-text">Passable (10-12)</span>
+                                <span class="progress-label-value">{{ dist.passable }} élèves</span>
+                            </div>
+                            <div class="progress-modern">
+                                <div class="progress-bar-modern warning" style="width: {{ (dist.passable / total * 100)|round }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-0">
+                            <div class="progress-label">
+                                <span class="progress-label-text">Insuffisant (&lt;10)</span>
+                                <span class="progress-label-value">{{ dist.insuffisant }} élèves</span>
+                            </div>
+                            <div class="progress-modern">
+                                <div class="progress-bar-modern danger" style="width: {{ (dist.insuffisant / total * 100)|round }}%"></div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="text-center" style="padding: 3rem;">
+                            <i class="fas fa-chart-bar" style="font-size: 3rem; color: #d1d5db; margin-bottom: 1rem;"></i>
+                            <p style="color: #6b7280; margin: 0;">Aucune note enregistrée</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-trophy" style="color: #f59e0b;"></i>
+                        Meilleurs étudiants
+                    </h2>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    {% for etudiant in stats.notes.topEtudiants %}
+                        <div class="list-item-modern">
+                            <div class="list-item-content">
+                                <div class="list-item-title">
+                                    <span style="color: #9ca3af; margin-right: 0.5rem;">#{{ loop.index }}</span>
+                                    {{ etudiant.prenom }} {{ etudiant.nom }}
+                                </div>
+                            </div>
+                            <div class="badge-modern success">{{ etudiant.moyenne|round(2) }}/20</div>
+                        </div>
+                    {% else %}
+                        <div class="text-center" style="padding: 2rem;">
+                            <p style="color: #6b7280; margin: 0;">Aucune donnée disponible</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Classes and Absences #}
+    <div class="row mb-4">
+        <div class="col-lg-6 mb-4">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-users" style="color: #6366f1;"></i>
+                        Classes les plus nombreuses
+                    </h2>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    {% for classe in stats.classes.topClasses %}
+                        <div class="list-item-modern">
+                            <div class="list-item-content">
+                                <div class="list-item-title">{{ classe.description }}</div>
+                                <div class="list-item-subtitle">Année {{ classe.annee }}</div>
+                            </div>
+                            <div class="badge-modern primary">{{ classe.nb_etudiants }} élèves</div>
+                        </div>
+                    {% else %}
+                        <div class="text-center" style="padding: 2rem;">
+                            <p style="color: #6b7280; margin: 0;">Aucune classe</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i>
+                        Absences à surveiller
+                    </h2>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    {% for absence in stats.absences.topAbsences %}
+                        <div class="list-item-modern">
+                            <div class="list-item-content">
+                                <div class="list-item-title">{{ absence.prenom }} {{ absence.nom }}</div>
+                            </div>
+                            <div class="badge-modern {{ absence.total_absences > 20 ? 'danger' : 'warning' }}">
+                                {{ absence.total_absences }} absences
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="text-center" style="padding: 2rem;">
+                            <p style="color: #6b7280; margin: 0;">Aucune absence enregistrée</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Recent Activity #}
+    <div class="row mb-4">
+        <div class="col-lg-6 mb-4">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-clipboard-list" style="color: #3b82f6;"></i>
+                        Dernières évaluations
+                    </h2>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    {% for eval in stats.activity.recentEvaluations %}
+                        <div class="list-item-modern">
+                            <div class="list-item-content">
+                                <div class="list-item-title">{{ eval.nom }}</div>
+                                <div class="list-item-subtitle">{{ eval.classe }}</div>
+                            </div>
+                            <div class="text-gray-500" style="font-size: 0.75rem;">
+                                {{ eval.date|date('d/m/Y') }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="text-center" style="padding: 2rem;">
+                            <p style="color: #6b7280; margin: 0;">Aucune évaluation récente</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-calendar-check" style="color: #10b981;"></i>
+                        Prochaines séances
+                    </h2>
+                </div>
+                <div class="panel-body" style="padding: 0;">
+                    {% for seance in stats.activity.upcomingSeances %}
+                        <div class="list-item-modern">
+                            <div class="list-item-content">
+                                <div class="list-item-title">{{ seance.description }}</div>
+                                <div class="list-item-subtitle">
+                                    {{ seance.classe }}
+                                    {% if seance.prof_nom %} • Prof. {{ seance.prof_prenom }} {{ seance.prof_nom }}{% endif %}
+                                </div>
+                            </div>
+                            <div class="text-gray-500" style="font-size: 0.75rem;">
+                                {{ seance.date|date('d/m') }}
+                                {% if seance.debut %} {{ seance.debut|date('H:i') }}{% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="text-center" style="padding: 2rem;">
+                            <p style="color: #6b7280; margin: 0;">Aucune séance programmée</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Active Professors #}
+    <div class="row">
+        <div class="col-12">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-chart-pie" style="color: #6366f1;"></i>
+                        Professeurs actifs
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        {% for prof in stats.professeurs.topProfs %}
+                            <div class="col-md-3 mb-3">
+                                <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.75rem; padding: 1rem;">
+                                    <h6 style="font-weight: 600; color: #111827; margin: 0 0 0.5rem 0;">
+                                        {{ prof.prenom }} {{ prof.nom }}
+                                    </h6>
+                                    <p style="font-size: 0.75rem; color: #6b7280; margin: 0 0 0.75rem 0;">
+                                        {{ prof.competences }}
+                                    </p>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-size: 0.75rem; color: #9ca3af;">Séances</span>
+                                        <span class="badge-modern primary">{{ prof.nb_seances }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

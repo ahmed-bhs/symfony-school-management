@@ -116,9 +116,24 @@ class AppFixtures extends Fixture
             }
         }
 
-        // 6. Créer des évaluations
-        $evaluations = [];
+        // Flush intermédiaire pour s'assurer que les relations sont bien établies
+        $manager->flush();
+
+        // 6. Créer des évaluations et notes
+        // Créer un tableau associatif classe_id => [etudiants]
+        $etudiantsParClasse = [];
+        foreach ($etudiants as $etudiant) {
+            $classeId = $etudiant->getClasse()->getId();
+            if (!isset($etudiantsParClasse[$classeId])) {
+                $etudiantsParClasse[$classeId] = [];
+            }
+            $etudiantsParClasse[$classeId][] = $etudiant;
+        }
+
         foreach ($classes as $classe) {
+            $classeId = $classe->getId();
+            $etudiantsClasse = $etudiantsParClasse[$classeId] ?? [];
+
             foreach (['1', '2'] as $semestre) {
                 $nombreEvals = $this->faker->numberBetween(3, 6);
 
@@ -131,23 +146,17 @@ class AppFixtures extends Fixture
                     $evaluation->setClasse($classe);
                     $evaluation->setProf($this->faker->randomElement($profs));
                     $manager->persist($evaluation);
-                    $evaluations[] = ['evaluation' => $evaluation, 'classe' => $classe];
+
+                    // 7. Créer des notes pour cette évaluation
+                    foreach ($etudiantsClasse as $etudiant) {
+                        $note = new Note();
+                        $note->setValeur($this->faker->randomFloat(2, 0, 20));
+                        $note->setEvaluation($evaluation);
+                        $note->setEtudiant($etudiant);
+                        $note->setClasse($classe);
+                        $manager->persist($note);
+                    }
                 }
-            }
-        }
-
-        // 7. Créer des notes
-        foreach ($evaluations as $evalData) {
-            $evaluation = $evalData['evaluation'];
-            $classe = $evalData['classe'];
-
-            foreach ($classe->getEtudiants() as $etudiant) {
-                $note = new Note();
-                $note->setValeur($this->faker->randomFloat(2, 0, 20));
-                $note->setEvaluation($evaluation);
-                $note->setEtudiant($etudiant);
-                $note->setClasse($classe);
-                $manager->persist($note);
             }
         }
 

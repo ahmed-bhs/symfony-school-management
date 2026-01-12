@@ -45,7 +45,7 @@ class Etudiant
     private ?bool $status = null;
 
     #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'etudiants')]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Classe $classe = null;
 
     /**

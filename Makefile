@@ -7,12 +7,12 @@ help: ## Affiche cette aide
 
 # Docker
 start: ## 🚀 Démarre tous les conteneurs Docker
-	docker-compose up -d
+	docker compose up -d
 	@echo "✅ Conteneurs démarrés"
 	@make status
 
 stop: ## 🛑 Arrête tous les conteneurs Docker
-	docker-compose down
+	docker compose down
 	@echo "✅ Conteneurs arrêtés"
 
 restart: ## 🔄 Redémarre tous les conteneurs
@@ -21,7 +21,7 @@ restart: ## 🔄 Redémarre tous les conteneurs
 
 status: ## 📊 Affiche le statut des conteneurs
 	@echo "\n📊 Statut des conteneurs:"
-	@docker-compose ps
+	@docker compose ps
 	@echo "\n🌐 URLs d'accès:"
 	@echo "  Application:  http://localhost:8080"
 	@echo "  Admin:        http://localhost:8080/admin"
@@ -30,61 +30,61 @@ status: ## 📊 Affiche le statut des conteneurs
 
 # Installation
 install: ## 📦 Installe les dépendances Composer
-	docker-compose exec -T php composer install --no-interaction
+	docker compose exec -T php composer install --no-interaction
 	@echo "✅ Dépendances installées"
 
 # Base de données
 db-init: ## 🗄️ Initialise la base de données
-	docker-compose exec -T php php bin/console doctrine:database:create --if-not-exists
-	docker-compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction
+	docker compose exec -T php php bin/console doctrine:database:create --if-not-exists
+	docker compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction
 	@echo "✅ Base de données initialisée"
 
 db-migrate: ## 📝 Crée une nouvelle migration
-	docker-compose exec php php bin/console make:migration
+	docker compose exec php php bin/console make:migration
 
 db-migrate-run: ## ⚡ Exécute les migrations
-	docker-compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction
+	docker compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction
 	@echo "✅ Migrations exécutées"
 
 db-reset: ## 🗑️ Reset complet de la base de données
 	@echo "⚠️  Suppression de la base de données..."
-	docker-compose exec -T php php bin/console doctrine:database:drop --force --if-exists
+	docker compose exec -T php php bin/console doctrine:database:drop --force --if-exists
 	@make db-init
 	@echo "✅ Base de données réinitialisée"
 
 db-schema: ## 📊 Affiche le schéma SQL
-	docker-compose exec php php bin/console doctrine:schema:update --dump-sql
+	docker compose exec php php bin/console doctrine:schema:update --dump-sql
 
 db-fixtures: ## 🌱 Charge les fixtures (données de test)
-	docker-compose exec -T php php bin/console doctrine:fixtures:load --no-interaction
+	docker compose exec -T php php bin/console doctrine:fixtures:load --no-interaction
 	@echo "✅ Fixtures chargées"
 
 # Cache
 cache: ## 🧹 Vide le cache Symfony
-	docker-compose exec -T php php bin/console cache:clear
+	docker compose exec -T php php bin/console cache:clear
 	@echo "✅ Cache vidé"
 
 # Logs
 logs: ## 📋 Affiche les logs (logs service=php pour un service spécifique)
-	docker-compose logs -f $(service)
+	docker compose logs -f $(service)
 
 # Sécurité
 hash-password: ## 🔒 Hash un mot de passe
-	docker-compose exec php php bin/console security:hash-password
+	docker compose exec php php bin/console security:hash-password
 
 create-admin: ## 👤 Crée un utilisateur admin (interactive)
 	@echo "👤 Création d'un administrateur"
 	@read -p "Email [admin@ecole.com]: " email; \
 	email=$${email:-admin@ecole.com}; \
 	echo "Hashage du mot de passe..."; \
-	docker-compose exec php php bin/console security:hash-password; \
+	docker compose exec php php bin/console security:hash-password; \
 	read -p "Hash du mot de passe: " hash; \
-	docker-compose exec -T db mysql -uroot -proot ecole -e "INSERT INTO user (email, roles, password) VALUES ('$$email', '[\"ROLE_ADMIN\",\"ROLE_USER\"]', '$$hash');" && \
+	docker compose exec -T db mysql -uroot -proot ecole -e "INSERT INTO user (email, roles, password) VALUES ('$$email', '[\"ROLE_ADMIN\",\"ROLE_USER\"]', '$$hash');" && \
 	echo "✅ Admin créé: $$email"
 
 # Tests
 test: ## 🧪 Exécute les tests
-	docker-compose exec -T php php bin/phpunit
+	docker compose exec -T php php bin/phpunit
 
 # Build
 build: ## 🏗️ Build complet du projet
@@ -100,14 +100,14 @@ build: ## 🏗️ Build complet du projet
 
 # Utilitaires
 shell: ## 🔍 Ouvre un shell (shell service=nginx pour autre service)
-	docker-compose exec $(or $(service),php) /bin/bash
+	docker compose exec $(or $(service),php) /bin/bash
 
 routes: ## 🎨 Liste toutes les routes
-	docker-compose exec php php bin/console debug:router
+	docker compose exec php php bin/console debug:router
 
 clean: ## 🧼 Nettoie le projet (supprime les volumes)
 	@echo "⚠️  Suppression de tous les volumes..."
-	docker-compose down -v
+	docker compose down -v
 	@echo "✅ Projet nettoyé"
 
 # Démo

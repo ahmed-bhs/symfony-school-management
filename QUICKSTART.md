@@ -18,8 +18,8 @@ make build
 
 **Avec Castor (après install):**
 ```bash
-docker-compose up -d
-docker-compose exec -T php composer install
+docker compose up -d
+docker compose exec -T php composer install
 vendor/bin/castor build
 ```
 
@@ -29,7 +29,7 @@ vendor/bin/castor build
 # Générer le hash du mot de passe
 make hash-password
 # ou
-docker-compose exec php php bin/console security:hash-password
+docker compose exec php php bin/console security:hash-password
 
 # Insérer l'utilisateur via PhpMyAdmin (http://localhost:8081)
 # ou via la commande:
@@ -78,14 +78,14 @@ make routes     # Lister les routes
 
 ### Les conteneurs ne démarrent pas
 ```bash
-docker-compose ps     # Vérifier l'état
-docker-compose logs   # Voir les erreurs
+docker compose ps     # Vérifier l'état
+docker compose logs   # Voir les erreurs
 ```
 
 ### Problèmes de permissions
 ```bash
-docker-compose exec php chown -R www-data:www-data /var/www/var
-docker-compose exec php chmod -R 775 /var/www/var
+docker compose exec php chown -R www-data:www-data /var/www/var
+docker compose exec php chmod -R 775 /var/www/var
 ```
 
 ### Base de données inaccessible

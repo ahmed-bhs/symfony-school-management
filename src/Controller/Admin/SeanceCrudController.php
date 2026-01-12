@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Seance;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -17,16 +18,24 @@ class SeanceCrudController extends AbstractCrudController
         return Seance::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('entity.session')
+            ->setEntityLabelInPlural('entity.sessions')
+            ->setPaginatorPageSize(12);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('description', 'Description'),
-            IntegerField::new('jour', 'Jour de la semaine (1-7)'),
-            DateTimeField::new('debut', 'Heure de début'),
-            DateTimeField::new('fin', 'Heure de fin'),
-            AssociationField::new('classe', 'Classe'),
-            AssociationField::new('prof', 'Professeur'),
+            IdField::new('id', 'form.id')->hideOnForm(),
+            TextField::new('description', 'form.description'),
+            IntegerField::new('jour', 'form.day'),
+            DateTimeField::new('debut', 'form.start_time'),
+            DateTimeField::new('fin', 'form.end_time'),
+            AssociationField::new('classe', 'form.class'),
+            AssociationField::new('prof', 'form.professor'),
         ];
     }
 }

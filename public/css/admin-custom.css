@@ -1,0 +1,279 @@
+/* Amélioration de l'interface d'administration */
+
+/* Cards personnalisées */
+.stats-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Badges colorés */
+.badge-pill {
+    padding: 0.35em 0.75em;
+    font-weight: 600;
+}
+
+/* Amélioration des cartes */
+.card {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+/* Progress bars améliorées */
+.progress {
+    height: 1.2rem;
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+/* Liste groupée */
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #e3e6f0;
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fc;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Titre de page */
+.content-header-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #5a5c69;
+}
+
+/* Badges personnalisés */
+.badge-success {
+    background-color: #1cc88a !important;
+}
+
+.badge-primary {
+    background-color: #4e73df !important;
+}
+
+.badge-warning {
+    background-color: #f6c23e !important;
+}
+
+.badge-danger {
+    background-color: #e74a3b !important;
+}
+
+.badge-info {
+    background-color: #36b9cc !important;
+}
+
+/* Tableaux améliorés */
+.table {
+    font-size: 0.95rem;
+}
+
+.table thead th {
+    background-color: #f8f9fc;
+    border-bottom: 2px solid #e3e6f0;
+    color: #5a5c69;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fc;
+}
+
+/* Boutons personnalisés */
+.btn {
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success {
+    background-color: #1cc88a;
+    border-color: #1cc88a;
+}
+
+.btn-success:hover {
+    background-color: #17a673;
+    border-color: #17a673;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    border-color: #2e59d9;
+}
+
+/* Formulaires améliorés */
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #d1d3e2;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Sidebar menu amélioré */
+.sidebar .menu-item {
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+    margin: 0.25rem 0.5rem;
+}
+
+.sidebar .menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Charts et graphiques */
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+/* Loading spinner */
+.spinner-border-custom {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+
+    .card-header h6 {
+        font-size: 0.85rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background-color: #2d3748;
+        color: #e2e8f0;
+    }
+
+    .card-header {
+        background-color: #1a202c;
+        border-bottom-color: #4a5568;
+    }
+
+    .table thead th {
+        background-color: #1a202c;
+        color: #e2e8f0;
+    }
+
+    .list-group-item {
+        background-color: #2d3748;
+        border-bottom-color: #4a5568;
+        color: #e2e8f0;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Transitions globales */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
+/* Icônes FontAwesome colorées */
+.fa-user-graduate {
+    color: #4e73df;
+}
+
+.fa-school {
+    color: #1cc88a;
+}
+
+.fa-chalkboard-teacher {
+    color: #36b9cc;
+}
+
+.fa-calendar-times {
+    color: #f6c23e;
+}
+
+.fa-clipboard-check {
+    color: #1cc88a;
+}
+
+.fa-trophy {
+    color: #f6c23e;
+}

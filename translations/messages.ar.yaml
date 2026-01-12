@@ -1,0 +1,146 @@
+# الترجمة العربية
+app:
+  name: 'نظام إدارة المدارس'
+  welcome: 'مرحبا'
+
+dashboard:
+  title: 'لوحة التحكم'
+  welcome: 'مرحبا بك في نظام إدارة المدارس'
+  statistics: 'الإحصائيات'
+
+menu:
+  dashboard: 'لوحة التحكم'
+  students_classes: 'الطلاب والفصول'
+  students: 'الطلاب'
+  classes: 'الفصول'
+  absences: 'الغيابات'
+  teachers: 'المعلمون'
+  professors: 'الأساتذة'
+  sessions: 'الحصص'
+  evaluations: 'التقييمات'
+  grades: 'الدرجات'
+  exercises: 'التمارين'
+  system: 'النظام'
+  logout: 'تسجيل الخروج'
+
+stats:
+  students: 'الطلاب'
+  active: 'نشط'
+  classes: 'الفصول'
+  average: 'المتوسط'
+  students_per_class: 'طلاب/فصل'
+  professors: 'الأساتذة'
+  sessions_scheduled: 'حصص مجدولة'
+  absences: 'الغيابات'
+  rate: 'المعدل'
+  of_students: 'من الطلاب'
+
+grades:
+  distribution: 'توزيع الدرجات'
+  average: 'المتوسط'
+  excellent: 'ممتاز'
+  good: 'جيد'
+  fairly_good: 'جيد جداً'
+  passable: 'مقبول'
+  insufficient: 'غير كافٍ'
+  top_students: 'أفضل 5 طلاب'
+  no_grades: 'لم يتم تسجيل أي درجات بعد.'
+
+classes:
+  most_populated: 'الفصول الأكثر عدداً'
+  students_count: 'طلاب'
+  no_classes: 'لا توجد فصول'
+
+absences:
+  most_absent: 'الطلاب الأكثر غياباً'
+  count: 'غيابات'
+  no_absences: 'لم يتم تسجيل أي غيابات'
+
+activity:
+  recent_evaluations: 'أحدث التقييمات'
+  upcoming_sessions: 'الحصص القادمة'
+  no_evaluations: 'لا توجد تقييمات حديثة'
+  no_sessions: 'لا توجد حصص مجدولة'
+
+professors:
+  most_active: 'الأساتذة الأكثر نشاطاً'
+  sessions_count: 'الحصص'
+
+entity:
+  student: 'طالب'
+  students: 'الطلاب'
+  class: 'فصل'
+  classes: 'الفصول'
+  professor: 'أستاذ'
+  professors: 'الأساتذة'
+  absence: 'غياب'
+  absences: 'الغيابات'
+  evaluation: 'تقييم'
+  evaluations: 'التقييمات'
+  grade: 'درجة'
+  grades: 'الدرجات'
+  session: 'حصة'
+  sessions: 'الحصص'
+  exercise: 'تمرين'
+  exercises: 'التمارين'
+
+form:
+  id: 'المعرف'
+  name: 'الاسم الأخير'
+  first_name: 'الاسم الأول'
+  birth_date: 'تاريخ الميلاد'
+  gender: 'الجنس'
+  male: 'ذكر'
+  female: 'أنثى'
+  address: 'العنوان'
+  father_name: 'اسم الأب'
+  mother_name: 'اسم الأم'
+  phone: 'رقم الهاتف'
+  status: 'نشط'
+  class: 'الفصل'
+  description: 'الوصف'
+  year: 'السنة الدراسية'
+  save: 'حفظ'
+  cancel: 'إلغاء'
+  delete: 'حذف'
+  edit: 'تعديل'
+  create: 'إنشاء'
+  search: 'بحث'
+  filter: 'تصفية'
+  cin: 'رقم بطاقة التعريف'
+  email: 'البريد الإلكتروني'
+  skills: 'المهارات'
+  start_date: 'تاريخ البداية'
+  end_date: 'تاريخ النهاية'
+  student: 'الطالب'
+  number_of_days: 'عدد الأيام'
+  day: 'يوم الأسبوع (1-7)'
+  start_time: 'وقت البداية'
+  end_time: 'وقت النهاية'
+  professor: 'الأستاذ'
+  semester: 'الفصل الدراسي'
+  coefficient: 'المعامل'
+  date: 'التاريخ'
+  evaluation: 'التقييم'
+  grade_value: 'الدرجة'
+
+action:
+  new: 'جديد'
+  edit: 'تعديل'
+  delete: 'حذف'
+  detail: 'التفاصيل'
+  back: 'رجوع'
+
+message:
+  confirm_delete: 'هل أنت متأكد من حذف هذا العنصر؟'
+  saved: 'تم الحفظ بنجاح'
+  deleted: 'تم الحذف بنجاح'
+  error: 'حدث خطأ'
+
+auth:
+  login: 'تسجيل الدخول'
+  email: 'البريد الإلكتروني'
+  password: 'كلمة المرور'
+  remember_me: 'تذكرني'
+  sign_in: 'تسجيل الدخول'
+  logout: 'تسجيل الخروج'

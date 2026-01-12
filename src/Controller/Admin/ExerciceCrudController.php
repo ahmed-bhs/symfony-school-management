@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Exercice;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -16,13 +17,21 @@ class ExerciceCrudController extends AbstractCrudController
         return Exercice::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('entity.exercise')
+            ->setEntityLabelInPlural('entity.exercises')
+            ->setPaginatorPageSize(12);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('description', 'Description'),
-            DateTimeField::new('date', 'Date'),
-            AssociationField::new('classe', 'Classe'),
+            IdField::new('id', 'form.id')->hideOnForm(),
+            TextField::new('description', 'form.description'),
+            DateTimeField::new('date', 'form.date'),
+            AssociationField::new('classe', 'form.class'),
         ];
     }
 }

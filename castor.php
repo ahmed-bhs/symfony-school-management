@@ -14,7 +14,7 @@ use function Castor\parallel;
 function start(): void
 {
     io()->title('🚀 Démarrage des conteneurs Docker');
-    run('docker-compose up -d');
+    run('docker compose up -d');
     io()->success('Conteneurs démarrés avec succès!');
     status();
 }
@@ -26,7 +26,7 @@ function start(): void
 function stop(): void
 {
     io()->title('🛑 Arrêt des conteneurs Docker');
-    run('docker-compose down');
+    run('docker compose down');
     io()->success('Conteneurs arrêtés avec succès!');
 }
 
@@ -48,7 +48,7 @@ function restart(): void
 function status(): void
 {
     io()->title('📊 Statut des conteneurs');
-    run('docker-compose ps');
+    run('docker compose ps');
 
     io()->newLine();
     io()->section('🌐 URLs d\'accès');
@@ -65,7 +65,7 @@ function status(): void
 function install(): void
 {
     io()->title('📦 Installation des dépendances');
-    run('docker-compose exec -T php composer install --no-interaction');
+    run('docker compose exec -T php composer install --no-interaction');
     io()->success('Dépendances installées avec succès!');
 }
 
@@ -78,10 +78,10 @@ function dbInit(): void
     io()->title('🗄️ Initialisation de la base de données');
 
     io()->section('Création de la base de données');
-    run('docker-compose exec -T php php bin/console doctrine:database:create --if-not-exists');
+    run('docker compose exec -T php php bin/console doctrine:database:create --if-not-exists');
 
     io()->section('Exécution des migrations');
-    run('docker-compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction');
+    run('docker compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction');
 
     io()->success('Base de données initialisée avec succès!');
 }
@@ -93,7 +93,7 @@ function dbInit(): void
 function dbMigrate(): void
 {
     io()->title('📝 Création d\'une migration');
-    run('docker-compose exec php php bin/console make:migration');
+    run('docker compose exec php php bin/console make:migration');
 }
 
 /**
@@ -103,7 +103,7 @@ function dbMigrate(): void
 function dbMigrateRun(): void
 {
     io()->title('⚡ Exécution des migrations');
-    run('docker-compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction');
+    run('docker compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction');
     io()->success('Migrations exécutées avec succès!');
 }
 
@@ -121,7 +121,7 @@ function dbReset(): void
     io()->title('🗑️ Reset de la base de données');
 
     io()->section('Suppression de la base');
-    run('docker-compose exec -T php php bin/console doctrine:database:drop --force --if-exists');
+    run('docker compose exec -T php php bin/console doctrine:database:drop --force --if-exists');
 
     io()->section('Recréation de la base');
     dbInit();
@@ -136,7 +136,7 @@ function dbReset(): void
 function cache(): void
 {
     io()->title('🧹 Nettoyage du cache');
-    run('docker-compose exec -T php php bin/console cache:clear');
+    run('docker compose exec -T php php bin/console cache:clear');
     io()->success('Cache vidé avec succès!');
 }
 
@@ -149,9 +149,9 @@ function logs(string $service = ''): void
     io()->title('📋 Logs des conteneurs');
 
     if ($service) {
-        run("docker-compose logs -f {$service}");
+        run("docker compose logs -f {$service}");
     } else {
-        run('docker-compose logs -f');
+        run('docker compose logs -f');
     }
 }
 
@@ -162,7 +162,7 @@ function logs(string $service = ''): void
 function hashPassword(): void
 {
     io()->title('🔒 Générateur de hash de mot de passe');
-    run('docker-compose exec php php bin/console security:hash-password');
+    run('docker compose exec php php bin/console security:hash-password');
 }
 
 /**
@@ -176,7 +176,7 @@ function createAdmin(): void
     $email = io()->ask('Email de l\'administrateur', 'admin@ecole.com');
 
     io()->writeln('Veuillez hasher votre mot de passe:');
-    run('docker-compose exec php php bin/console security:hash-password');
+    run('docker compose exec php php bin/console security:hash-password');
 
     $hashedPassword = io()->ask('Entrez le hash du mot de passe');
 
@@ -186,7 +186,7 @@ function createAdmin(): void
         $hashedPassword
     );
 
-    run("docker-compose exec -T db mysql -uroot -proot ecole -e \"{$sql}\"");
+    run("docker compose exec -T db mysql -uroot -proot ecole -e \"{$sql}\"");
 
     io()->success("Administrateur créé avec succès: {$email}");
 }
@@ -198,7 +198,7 @@ function createAdmin(): void
 function test(): void
 {
     io()->title('🧪 Exécution des tests');
-    run('docker-compose exec -T php php bin/phpunit');
+    run('docker compose exec -T php php bin/phpunit');
 }
 
 /**
@@ -237,7 +237,7 @@ function build(): void
 function shell(string $service = 'php'): void
 {
     io()->title("🔍 Ouverture d'un shell dans le conteneur {$service}");
-    run("docker-compose exec {$service} /bin/bash", tty: true);
+    run("docker compose exec {$service} /bin/bash", tty: true);
 }
 
 /**
@@ -247,7 +247,7 @@ function shell(string $service = 'php'): void
 function routes(): void
 {
     io()->title('🎨 Routes de l\'application');
-    run('docker-compose exec php php bin/console debug:router');
+    run('docker compose exec php php bin/console debug:router');
 }
 
 /**
@@ -257,7 +257,7 @@ function routes(): void
 function dbSchema(): void
 {
     io()->title('📊 Schéma de la base de données');
-    run('docker-compose exec php php bin/console doctrine:schema:update --dump-sql');
+    run('docker compose exec php php bin/console doctrine:schema:update --dump-sql');
 }
 
 /**
@@ -272,6 +272,6 @@ function clean(): void
     }
 
     io()->title('🧼 Nettoyage complet du projet');
-    run('docker-compose down -v');
+    run('docker compose down -v');
     io()->success('Projet nettoyé avec succès!');
 }

@@ -28,7 +28,7 @@ class Seance
     private ?int $jour = null;
 
     #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'seances')]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Classe $classe = null;
 
     #[ORM\ManyToOne(targetEntity: Prof::class, inversedBy: 'seances')]

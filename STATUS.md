@@ -21,7 +21,7 @@ La migration de **Symfony 3.1** vers **Symfony 7.4 + EasyAdmin** est **100% comp
 **Le projet est prêt mais ne peut pas démarrer sans Docker.**
 
 ```
-❌ Erreur actuelle: docker-compose: No such file or directory
+❌ Erreur actuelle: docker compose: No such file or directory
 ```
 
 ---
@@ -40,12 +40,12 @@ newgrp docker
 
 # Vérifier
 docker --version
-docker-compose --version
+docker compose --version
 ```
 
 #### Sur Fedora/RHEL
 ```bash
-sudo dnf install docker docker-compose
+sudo dnf install docker docker compose
 sudo systemctl start docker
 sudo usermod -aG docker $USER
 newgrp docker
@@ -140,7 +140,7 @@ make db-fixtures
 - **STATUS.md** - Ce fichier
 
 ### Configuration
-- **docker-compose.yml** - Configuration Docker
+- **docker compose.yml** - Configuration Docker
 - **Dockerfile** - Image PHP personnalisée
 - **Makefile** - 20+ commandes pratiques
 - **castor.php** - Task runner PHP
@@ -277,7 +277,7 @@ sudo sh get-docker.sh
 
 **Port déjà utilisé**
 ```bash
-# Modifier les ports dans docker-compose.yml
+# Modifier les ports dans docker compose.yml
 ports:
   - "8081:80"  # Au lieu de 8080
 ```

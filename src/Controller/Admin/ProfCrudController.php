@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Prof;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -10,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class ProfCrudController extends AbstractCrudController
 {
@@ -18,21 +20,33 @@ class ProfCrudController extends AbstractCrudController
         return Prof::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('entity.professor')
+            ->setEntityLabelInPlural('entity.professors')
+            ->setPaginatorPageSize(12);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('nom', 'Nom'),
-            TextField::new('prenom', 'Prénom'),
-            IntegerField::new('cin', 'CIN'),
-            DateTimeField::new('dateNaissance', 'Date de naissance'),
-            TextField::new('genre', 'Genre'),
-            EmailField::new('email', 'Email'),
-            TextareaField::new('competences', 'Compétences'),
-            TextField::new('adresse', 'Adresse'),
-            IntegerField::new('numeroTel', 'Numéro de téléphone'),
-            DateTimeField::new('debut', 'Date de début'),
-            DateTimeField::new('fin', 'Date de fin'),
+            IdField::new('id', 'form.id')->hideOnForm(),
+            TextField::new('nom', 'form.name'),
+            TextField::new('prenom', 'form.first_name'),
+            IntegerField::new('cin', 'form.cin'),
+            DateTimeField::new('dateNaissance', 'form.birth_date'),
+            ChoiceField::new('genre', 'form.gender')
+                ->setChoices([
+                    'form.male' => 'M',
+                    'form.female' => 'F',
+                ]),
+            EmailField::new('email', 'form.email'),
+            TextareaField::new('competences', 'form.skills'),
+            TextField::new('adresse', 'form.address'),
+            IntegerField::new('numeroTel', 'form.phone'),
+            DateTimeField::new('debut', 'form.start_date'),
+            DateTimeField::new('fin', 'form.end_date'),
         ];
     }
 }

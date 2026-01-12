@@ -27,8 +27,9 @@ WORKDIR /var/www
 # Copy existing application directory
 COPY . /var/www
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www \
+# Create var directory and set permissions
+RUN mkdir -p /var/www/var \
+    && chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/var
 
 # Expose port 9000 and start php-fpm server
