@@ -1,0 +1,98 @@
+page_title.dashboard: 'لوحة التحكم'
+page_title.detail: '%entity_label_singular% <small>(#%entity_id%)</small>'
+page_title.edit: 'تعديل %entity_label_singular%'
+page_title.index: '%entity_label_plural%'
+page_title.new: 'إنشاء %entity_label_singular%'
+page_title.exception: خطأ|أخطاء
+datagrid.hidden_results: 'لا يمكن عرض بعض النتائج لأنك لا تملك الصلاحيات الكافية'
+datagrid.no_results: 'لم يتم العثور على نتائج.'
+paginator.first: الأول
+paginator.previous: السابق
+paginator.next: التالي
+paginator.last: الأخير
+paginator.counter: '<strong>%start%</strong> - <strong>%end%</strong> من <strong>%results%</strong>'
+paginator.results: '{0} لا توجد نتائج|{1} <strong>نتيجة واحدة</strong>|]1,Inf] <strong>%count%</strong> نتيجة'
+'label.true': نعم
+'label.false': لا
+label.empty: فارغ
+'label.null': معدوم
+label.object: 'كائن PHP'
+label.inaccessible: 'غير متاح'
+label.inaccessible.explanation: 'لا يوجد getter لهذا الحقل أو أن الخاصية غير عامة'
+label.form.empty_value: 'لا شيء'
+field.code_editor.view_code: 'عرض الكود'
+field.text_editor.view_content: 'عرض المحتوى'
+action.entity_actions: الإجراءات
+action.new: 'إضافة %entity_label_singular%'
+action.search: بحث
+action.detail: إظهار
+action.edit: تعديل
+action.delete: حذف
+action.cancel: إلغاء
+action.index: 'العودة إلى القائمة'
+action.deselect: 'إلغاء التحديد'
+action.add_new_item: 'إضافة عنصر جديد'
+action.remove_item: 'حذف العنصر'
+action.choose_file: 'اختيار ملف'
+action.close: إغلاق
+action.create: إنشاء
+action.create_and_add_another: 'إنشاء وإضافة آخر'
+action.create_and_continue: 'إنشاء ومتابعة التعديل'
+action.save: 'حفظ التغييرات'
+action.save_and_continue: 'حفظ ومتابعة التعديل'
+action.toggle_dropdown: 'تبديل القائمة المنسدلة'
+batch_action_modal.title: 'سيتم تطبيق هذا الإجراء على %num_items% عنصر (عناصر).'
+batch_action_modal.content: 'لا يمكن التراجع عن هذه العملية.'
+batch_action_modal.action: متابعة
+delete_modal.title: 'هل تريد فعلاً حذف هذا العنصر؟'
+delete_modal.content: 'لا يمكن التراجع عن هذه العملية.'
+filter.title: التصفية
+filter.button.clear: مسح
+filter.button.apply: تطبيق
+filter.label.is_equal_to: يساوي
+filter.label.is_not_equal_to: 'لا يساوي'
+filter.label.is_greater_than: 'أكبر من'
+filter.label.is_greater_than_or_equal_to: 'أكبر من أو يساوي'
+filter.label.is_less_than: 'أصغر من'
+filter.label.is_less_than_or_equal_to: 'أصغر من أو يساوي'
+filter.label.is_between: بين
+filter.label.contains: يحتوي
+filter.label.contains_all: 'يحتوي على الكل'
+filter.label.not_contains: 'لا يحتوي'
+filter.label.starts_with: 'يبدأ بـ'
+filter.label.ends_with: 'ينتهي بـ'
+filter.label.exactly: 'مطابق تماماً'
+filter.label.not_exactly: 'غير مطابق'
+filter.label.is_same: نفسه
+filter.label.is_not_same: 'ليس نفسه'
+filter.label.is_after: بعد
+filter.label.is_after_or_same: 'بعد أو نفسه'
+filter.label.is_before: قبل
+filter.label.is_before_or_same: 'قبل أو نفسه'
+form.are_you_sure: 'لم تقم بحفظ التغييرات التي أجريتها على هذا النموذج.'
+form.tab.error_badge_title: 'إدخال غير صالح|%count% إدخالات غير صالحة'
+form.slug.confirm_text: 'إذا قمت بتغيير الـ slug، قد تتسبب في كسر الروابط على صفحات أخرى.'
+user.logged_in_as: 'تم تسجيل الدخول بـ'
+user.unnamed: 'مستخدم بدون اسم'
+user.anonymous: 'مستخدم مجهول'
+user.sign_out: 'تسجيل الخروج'
+user.exit_impersonation: 'الخروج من الانتحال'
+settings.appearance.label: المظهر
+settings.appearance.light: الفاتح
+settings.appearance.dark: الداكن
+settings.appearance.auto: تلقائي
+settings.locale: لغة
+login_page.username: 'اسم المستخدم'
+login_page.password: 'كلمة المرور'
+login_page.sign_in: 'تسجيل الدخول'
+login_page.forgot_password: 'هل نسيت كلمة المرور؟'
+login_page.remember_me: تذكرني
+exception.entity_not_found: 'هذا العنصر لم يعد متاحاً.'
+exception.entity_remove: 'لا يمكن حذف هذا العنصر لأن عناصر أخرى تعتمد عليه.'
+exception.forbidden_action: 'لا يمكن تنفيذ الإجراء المطلوب على هذا العنصر.'
+exception.insufficient_entity_permission: 'ليس لديك صلاحية للوصول إلى هذا العنصر.'
+autocomplete.no-results-found: 'لم يتم العثور على نتائج'
+autocomplete.no-more-results: 'لا يوجد نتائج أٌخرى'
+autocomplete.loading-more-results: 'جاري تحميل نتائج إضافية…'
+autocomplete.loading: 'جاري التحميل...'
+files: ملفات

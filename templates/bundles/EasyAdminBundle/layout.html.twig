@@ -1,0 +1,3 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block html_attributes %}lang="{{ app.request.locale }}" dir="{{ app.request.locale == 'ar' ? 'rtl' : 'ltr' }}"{% endblock %}

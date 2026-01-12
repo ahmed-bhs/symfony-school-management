@@ -1,0 +1,67 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    <i class="fa fa-school"></i> {{ 'class_selection.select_class'|trans }} - {{ entity_label_key|trans }}
+{% endblock %}
+
+{% block main %}
+    <div class="class-selection-container">
+        <div class="selection-header">
+            <h2>{{ 'class_selection.title'|trans({'%entity%': entity_label_key|trans}) }}</h2>
+            <p class="text-muted">{{ 'class_selection.description'|trans }}</p>
+        </div>
+
+        <div class="class-cards-grid">
+            {% for item in classes %}
+                {% set classe = item.classe %}
+                {% set count = item.count %}
+
+                {% set colorIndex = classe.id % 8 %}
+                <a href="{{ ea_url()
+                    .setController('App\\Controller\\Admin\\' ~ entity_name ~ 'CrudController')
+                    .setAction('index')
+                    .set('filters[classe][comparison]', '=')
+                    .set('filters[classe][value]', classe.id)
+                }}" class="class-card class-card-color-{{ colorIndex }}">
+                    <div class="class-card-header">
+                        <div class="class-icon">
+                            <i class="fa fa-graduation-cap"></i>
+                        </div>
+                        <div class="class-badge">
+                            <span class="badge badge-primary">{{ count }}</span>
+                        </div>
+                    </div>
+
+                    <div class="class-card-body">
+                        <h3 class="class-title">{{ classe.description }}</h3>
+                        <p class="class-year">
+                            <i class="fa fa-calendar"></i> {{ 'form.year'|trans }}: {{ classe.annee }}
+                        </p>
+                        <p class="class-count">
+                            {{ 'class_selection.items_count'|trans({'%count%': count, '%entity%': entity_label_key|trans}) }}
+                        </p>
+                    </div>
+
+                    <div class="class-card-footer">
+                        <span class="view-link">
+                            {{ 'class_selection.view'|trans }} <i class="fa fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i> {{ 'class_selection.no_classes'|trans }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="selection-footer">
+            <a href="{{ ea_url()
+                .setController('App\\Controller\\Admin\\' ~ entity_name ~ 'CrudController')
+                .setAction('index')
+            }}" class="btn btn-secondary">
+                <i class="fa fa-list"></i> {{ 'class_selection.view_all'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}

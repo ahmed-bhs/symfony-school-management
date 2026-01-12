@@ -1,0 +1,70 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: ecole_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecole
+      MYSQL_USER: ecole_user
+      MYSQL_PASSWORD: ecole_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - ecole_network
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecole_php
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - "9000:9000"
+    networks:
+      - ecole_network
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:alpine
+    container_name: ecole_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - ecole_network
+    depends_on:
+      - php
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ecole_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    networks:
+      - ecole_network
+    depends_on:
+      - db
+
+networks:
+  ecole_network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

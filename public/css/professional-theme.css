@@ -1,0 +1,590 @@
+/* ===================================================================
+   PROFESSIONAL SCHOOL MANAGEMENT THEME
+   Clean, modern and intuitive design
+   =================================================================== */
+
+/* ===================================================================
+   1. CSS VARIABLES - COLOR PALETTE
+   =================================================================== */
+:root {
+    /* Primary Colors */
+    --primary-50: #f0f4ff;
+    --primary-100: #e0eaff;
+    --primary-200: #c7d7fe;
+    --primary-300: #a5b9fc;
+    --primary-400: #8194f8;
+    --primary-500: #6366f1;
+    --primary-600: #4f46e5;
+    --primary-700: #4338ca;
+    --primary-800: #3730a3;
+    --primary-900: #312e81;
+
+    /* Neutral Colors */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+
+    /* Semantic Colors */
+    --success: #10b981;
+    --success-light: #d1fae5;
+    --warning: #f59e0b;
+    --warning-light: #fef3c7;
+    --danger: #ef4444;
+    --danger-light: #fee2e2;
+    --info: #3b82f6;
+    --info-light: #dbeafe;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+}
+
+/* ===================================================================
+   2. GLOBAL STYLES
+   =================================================================== */
+body {
+    font-family: var(--font-sans);
+    color: var(--gray-800);
+    background-color: var(--gray-50);
+    line-height: 1.6;
+}
+
+.content-wrapper {
+    background-color: var(--gray-50);
+}
+
+/* ===================================================================
+   3. STATISTICS CARDS
+   =================================================================== */
+.stat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--gray-200);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-300);
+}
+
+.stat-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+}
+
+.stat-card-title {
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray-600);
+}
+
+.stat-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    font-size: 1.5rem;
+}
+
+.stat-card-icon.primary {
+    background: var(--primary-100);
+    color: var(--primary-600);
+}
+
+.stat-card-icon.success {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.stat-card-icon.warning {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.stat-card-icon.info {
+    background: var(--info-light);
+    color: var(--info);
+}
+
+.stat-card-value {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray-900);
+    line-height: 1;
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-card-description {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+}
+
+.stat-card-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    background: var(--success-light);
+    color: var(--success);
+}
+
+/* ===================================================================
+   4. CARDS & PANELS
+   =================================================================== */
+.panel {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+}
+
+.panel-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--gray-200);
+    background: white;
+}
+
+.panel-title {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--gray-900);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.panel-body {
+    padding: var(--spacing-lg);
+}
+
+/* ===================================================================
+   5. PROGRESS BARS
+   =================================================================== */
+.progress-modern {
+    height: 8px;
+    background-color: var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.progress-bar-modern {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+    border-radius: var(--radius-lg);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.progress-bar-modern.success {
+    background: linear-gradient(90deg, var(--success), #059669);
+}
+
+.progress-bar-modern.warning {
+    background: linear-gradient(90deg, var(--warning), #d97706);
+}
+
+.progress-bar-modern.danger {
+    background: linear-gradient(90deg, var(--danger), #dc2626);
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.progress-label-text {
+    color: var(--gray-700);
+    font-weight: var(--font-weight-medium);
+}
+
+.progress-label-value {
+    color: var(--gray-600);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ===================================================================
+   6. TABLES
+   =================================================================== */
+.table-modern {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-modern thead th {
+    background-color: var(--gray-50);
+    color: var(--gray-700);
+    font-weight: var(--font-weight-semibold);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.table-modern tbody tr {
+    transition: background-color 0.2s;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.table-modern tbody tr:hover {
+    background-color: var(--gray-50);
+}
+
+.table-modern tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table-modern tbody td {
+    padding: 1rem;
+    color: var(--gray-700);
+    font-size: 0.875rem;
+}
+
+/* ===================================================================
+   7. BADGES
+   =================================================================== */
+.badge-modern {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+}
+
+.badge-modern.primary {
+    background: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.badge-modern.success {
+    background: var(--success-light);
+    color: #065f46;
+}
+
+.badge-modern.warning {
+    background: var(--warning-light);
+    color: #92400e;
+}
+
+.badge-modern.danger {
+    background: var(--danger-light);
+    color: #991b1b;
+}
+
+.badge-modern.info {
+    background: var(--info-light);
+    color: #1e40af;
+}
+
+.badge-modern.neutral {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+/* ===================================================================
+   8. BUTTONS
+   =================================================================== */
+.btn-modern {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+    gap: var(--spacing-sm);
+}
+
+.btn-modern:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-modern:active {
+    transform: translateY(0);
+}
+
+.btn-modern.primary {
+    background: var(--primary-600);
+    color: white;
+}
+
+.btn-modern.primary:hover {
+    background: var(--primary-700);
+}
+
+.btn-modern.secondary {
+    background: white;
+    color: var(--gray-700);
+    border-color: var(--gray-300);
+}
+
+.btn-modern.secondary:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
+}
+
+.btn-modern.success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-modern.success:hover {
+    background: #059669;
+}
+
+/* ===================================================================
+   9. FORMS
+   =================================================================== */
+.form-group-modern {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label-modern {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--gray-900);
+    background-color: white;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    transition: all 0.2s;
+}
+
+.form-control-modern:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+.form-control-modern::placeholder {
+    color: var(--gray-400);
+}
+
+/* ===================================================================
+   10. LIST ITEMS
+   =================================================================== */
+.list-item-modern {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    transition: background-color 0.2s;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.list-item-modern:last-child {
+    border-bottom: none;
+}
+
+.list-item-modern:hover {
+    background-color: var(--gray-50);
+}
+
+.list-item-content {
+    flex: 1;
+}
+
+.list-item-title {
+    font-weight: var(--font-weight-medium);
+    color: var(--gray-900);
+    font-size: 0.875rem;
+}
+
+.list-item-subtitle {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    margin-top: 0.25rem;
+}
+
+/* ===================================================================
+   11. ANIMATIONS
+   =================================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Stagger animation for cards */
+.stat-card:nth-child(1) { animation-delay: 0s; }
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.2s; }
+.stat-card:nth-child(4) { animation-delay: 0.3s; }
+
+/* ===================================================================
+   12. UTILITIES
+   =================================================================== */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.text-gray-500 { color: var(--gray-500); }
+.text-gray-600 { color: var(--gray-600); }
+.text-gray-700 { color: var(--gray-700); }
+.text-gray-900 { color: var(--gray-900); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+.mb-5 { margin-bottom: var(--spacing-xl); }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+/* ===================================================================
+   13. EASYADMIN CUSTOMIZATION
+   =================================================================== */
+/* Fix content header background */
+.content-header {
+    background-color: var(--gray-50) !important;
+    background: var(--gray-50) !important;
+}
+
+/* Make EasyAdmin content take full width */
+.content-wrapper {
+    max-width: 100% !important;
+}
+
+.content {
+    max-width: 100% !important;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Make datatable container full width */
+.content-body,
+.content-panel,
+.table-responsive {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Adjust main content area */
+#main .content-wrapper {
+    padding: 0;
+}
+
+#main .content {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Make sure EasyAdmin tables use full width */
+.ea-index .table-responsive,
+.ea-detail .table-responsive,
+.ea-edit .form-panel,
+.ea-new .form-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Ensure the datatable itself is full width */
+.table {
+    width: 100% !important;
+}
+
+/* Remove container max-width constraints */
+.container-fluid {
+    max-width: 100% !important;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* ===================================================================
+   14. RESPONSIVE
+   =================================================================== */
+@media (max-width: 768px) {
+    .stat-card-value {
+        font-size: 1.5rem;
+    }
+
+    .panel-body {
+        padding: var(--spacing-md);
+    }
+
+    .content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

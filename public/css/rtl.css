@@ -1,0 +1,112 @@
+/* Support RTL pour l'arabe */
+html[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] body {
+    direction: rtl;
+}
+
+html[dir="rtl"] .sidebar {
+    right: 0;
+    left: auto;
+}
+
+html[dir="rtl"] .content-wrapper {
+    margin-right: 250px;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .form-control {
+    text-align: right;
+}
+
+html[dir="rtl"] .text-left {
+    text-align: right !important;
+}
+
+html[dir="rtl"] .text-right {
+    text-align: left !important;
+}
+
+html[dir="rtl"] .mr-2 {
+    margin-right: 0 !important;
+    margin-left: 0.5rem !important;
+}
+
+html[dir="rtl"] .ml-2 {
+    margin-left: 0 !important;
+    margin-right: 0.5rem !important;
+}
+
+html[dir="rtl"] .float-left {
+    float: right !important;
+}
+
+html[dir="rtl"] .float-right {
+    float: left !important;
+}
+
+html[dir="rtl"] .border-left-primary {
+    border-left: none !important;
+    border-right: 0.25rem solid #4e73df !important;
+}
+
+html[dir="rtl"] .border-left-success {
+    border-left: none !important;
+    border-right: 0.25rem solid #1cc88a !important;
+}
+
+html[dir="rtl"] .border-left-info {
+    border-left: none !important;
+    border-right: 0.25rem solid #36b9cc !important;
+}
+
+html[dir="rtl"] .border-left-warning {
+    border-left: none !important;
+    border-right: 0.25rem solid #f6c23e !important;
+}
+
+/* Menu EasyAdmin */
+html[dir="rtl"] .sidebar .menu-item {
+    text-align: right;
+}
+
+html[dir="rtl"] .fa-chevron-right::before {
+    content: "\f053";
+}
+
+html[dir="rtl"] .fa-chevron-left::before {
+    content: "\f054";
+}
+
+/* Tableaux */
+html[dir="rtl"] table {
+    direction: rtl;
+}
+
+html[dir="rtl"] .table th,
+html[dir="rtl"] .table td {
+    text-align: right;
+}
+
+/* Badges */
+html[dir="rtl"] .badge {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* Boutons */
+html[dir="rtl"] .btn .fa {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* Police arabe */
+html[lang="ar"],
+html[lang="ar"] body,
+html[lang="ar"] .card,
+html[lang="ar"] .table {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Arabic Typesetting', 'Traditional Arabic', 'Simplified Arabic';
+}
