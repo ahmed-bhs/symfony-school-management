@@ -19,7 +19,7 @@ If this project helped you learn Symfony or saved you time, consider buying me a
 
 > **📚 Educational Project** - A modern school management system built with Symfony 7.4 and EasyAdmin 4. Perfect for learning PHP, Symfony framework, and modern web development practices.
 
-This project is a **complete modernization** of an [8-year-old Symfony 3.1 application](https://github.com/ahmed-bhs/old-school-project), migrated to Symfony 7.4 with best practices and modern architecture.
+This project is a **complete modernization** of an [8-year-old Symfony 3.1 application (archived)](https://github.com/ahmed-bhs/old-school-project), migrated to Symfony 7.4 with best practices and modern architecture.
 
 ---
 
@@ -229,7 +229,7 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/school-management-symfony.git
+   git clone https://github.com/ahmed-bhs/symfony-school-management.git
    cd school-management-symfony
    ```
 
@@ -275,7 +275,7 @@ vendor/bin/castor db:init
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/school-management-symfony.git
+   git clone https://github.com/ahmed-bhs/symfony-school-management.git
    cd school-management-symfony
    ```
 
@@ -594,8 +594,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you have questions or need help:
 
 1. Check the [documentation](docs/)
-2. Search [existing issues](https://github.com/YOUR_USERNAME/school-management-symfony/issues)
-3. Create a [new issue](https://github.com/YOUR_USERNAME/school-management-symfony/issues/new)
+2. Search [existing issues](https://github.com/ahmed-bhs/symfony-school-management/issues)
+3. Create a [new issue](https://github.com/ahmed-bhs/symfony-school-management/issues/new)
 4. Ask in [Symfony Slack](https://symfony.com/slack)
 
 ---
