@@ -10,11 +10,16 @@ use App\Entity\Exercice;
 use App\Entity\Note;
 use App\Entity\Prof;
 use App\Entity\Seance;
+use App\Repository\ClasseRepository;
+use App\Repository\EvaluationRepository;
+use App\Repository\NoteRepository;
 use App\Service\DashboardStatsService;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -23,7 +28,11 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private DashboardStatsService $statsService,
-        private TranslatorInterface $translator
+        private TranslatorInterface $translator,
+        private ClasseRepository $classeRepository,
+        private EvaluationRepository $evaluationRepository,
+        private NoteRepository $noteRepository,
+        private EntityManagerInterface $entityManager
     ) {
     }
 
@@ -34,6 +43,92 @@ class DashboardController extends AbstractDashboardController
 
         return $this->render('admin/dashboard_professional.html.twig', [
             'stats' => $stats,
+        ]);
+    }
+
+    #[Route('/admin/mass-grade/select-class', name: 'admin_mass_grade_select_class')]
+    public function massGradeSelectClass(): Response
+    {
+        $classes = $this->classeRepository->findAll();
+
+        return $this->render('admin/mass_grade/select_class.html.twig', [
+            'classes' => $classes,
+        ]);
+    }
+
+    #[Route('/admin/mass-grade/select-evaluation/{classeId}', name: 'admin_mass_grade_select_evaluation')]
+    public function massGradeSelectEvaluation(int $classeId): Response
+    {
+        $classe = $this->classeRepository->find($classeId);
+
+        if (!$classe) {
+            throw $this->createNotFoundException('Classe non trouvée');
+        }
+
+        $evaluations = $this->evaluationRepository->findBy(['classe' => $classe], ['date' => 'DESC']);
+
+        return $this->render('admin/mass_grade/select_evaluation.html.twig', [
+            'classe' => $classe,
+            'evaluations' => $evaluations,
+        ]);
+    }
+
+    #[Route('/admin/mass-grade/enter-grades/{evaluationId}', name: 'admin_mass_grade_enter')]
+    public function massGradeEnter(int $evaluationId, Request $request): Response
+    {
+        $evaluation = $this->evaluationRepository->find($evaluationId);
+
+        if (!$evaluation) {
+            throw $this->createNotFoundException('Évaluation non trouvée');
+        }
+
+        $classe = $evaluation->getClasse();
+        $etudiants = $classe->getEtudiants();
+
+        // Récupérer les notes existantes
+        $existingNotes = [];
+        foreach ($this->noteRepository->findBy(['evaluation' => $evaluation]) as $note) {
+            $existingNotes[$note->getEtudiant()->getId()] = $note;
+        }
+
+        // Traitement du formulaire
+        if ($request->isMethod('POST')) {
+            $grades = $request->request->all('grades');
+
+            foreach ($etudiants as $etudiant) {
+                $gradeValue = $grades[$etudiant->getId()] ?? null;
+
+                if ($gradeValue !== null && $gradeValue !== '') {
+                    $gradeValue = (float) $gradeValue;
+
+                    if (isset($existingNotes[$etudiant->getId()])) {
+                        $note = $existingNotes[$etudiant->getId()];
+                        $note->setValeur($gradeValue);
+                    } else {
+                        $note = new Note();
+                        $note->setEtudiant($etudiant);
+                        $note->setEvaluation($evaluation);
+                        $note->setClasse($classe);
+                        $note->setValeur($gradeValue);
+                        $this->entityManager->persist($note);
+                    }
+                } elseif (isset($existingNotes[$etudiant->getId()])) {
+                    $this->entityManager->remove($existingNotes[$etudiant->getId()]);
+                }
+            }
+
+            $this->entityManager->flush();
+
+            $this->addFlash('success', $this->translator->trans('mass_grade.success', [], 'messages'));
+
+            return $this->redirectToRoute('admin_mass_grade_enter', ['evaluationId' => $evaluationId]);
+        }
+
+        return $this->render('admin/mass_grade/enter_grades.html.twig', [
+            'evaluation' => $evaluation,
+            'classe' => $classe,
+            'etudiants' => $etudiants,
+            'existingNotes' => $existingNotes,
         ]);
     }
 
