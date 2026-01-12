@@ -19,6 +19,7 @@
                 <a href="{{ ea_url()
                     .setController('App\\Controller\\Admin\\' ~ entity_name ~ 'CrudController')
                     .setAction('index')
+                    .set('filters[classe][comparison]', '=')
                     .set('filters[classe][value]', classe.id)
                 }}" class="class-card">
                     <div class="class-card-header">
