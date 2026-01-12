@@ -1,0 +1,147 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    <i class="fa fa-edit"></i> {{ 'mass_grade.enter_grades_title'|trans }}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="mb-4">
+            <a href="{{ path('admin_mass_grade_select_evaluation', {classeId: classe.id}) }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> {{ 'action.back'|trans }}
+            </a>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4><i class="fa fa-school"></i> {{ classe.description }}</h4>
+                        <small>{{ classe.annee }} - {{ etudiants.count }} {{ 'entity.students'|trans|lower }}</small>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <h4><i class="fa fa-clipboard-check"></i> {{ evaluation.description }}</h4>
+                        <small>
+                            {{ evaluation.date|date('d/m/Y') }} |
+                            {{ 'form.coefficient'|trans }}: {{ evaluation.coef }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form method="post" id="massGradeForm">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover mass-grade-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="width: 5%">#</th>
+                                    <th style="width: 25%">{{ 'form.name'|trans }}</th>
+                                    <th style="width: 25%">{{ 'form.first_name'|trans }}</th>
+                                    <th style="width: 15%">{{ 'form.gender'|trans }}</th>
+                                    <th style="width: 20%">{{ 'mass_grade.grade_column'|trans }}</th>
+                                    <th style="width: 10%">{{ 'mass_grade.status'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for etudiant in etudiants %}
+                                    {% set existingNote = existingNotes[etudiant.id] ?? null %}
+                                    <tr class="{% if existingNote %}table-success{% endif %}">
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ etudiant.nom }}</td>
+                                        <td>{{ etudiant.prenom }}</td>
+                                        <td>
+                                            {% if etudiant.genre == 'M' %}
+                                                <span class="badge badge-primary">{{ 'form.male'|trans }}</span>
+                                            {% else %}
+                                                <span class="badge badge-danger">{{ 'form.female'|trans }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <input type="number"
+                                                   step="0.01"
+                                                   min="0"
+                                                   max="20"
+                                                   name="grades[{{ etudiant.id }}]"
+                                                   value="{{ existingNote ? existingNote.valeur : '' }}"
+                                                   class="form-control grade-input"
+                                                   placeholder="0.00"
+                                                   autocomplete="off">
+                                        </td>
+                                        <td class="text-center">
+                                            {% if existingNote %}
+                                                <i class="fa fa-check-circle text-success" title="{{ 'mass_grade.saved'|trans }}"></i>
+                                            {% else %}
+                                                <i class="fa fa-circle text-muted" title="{{ 'mass_grade.not_saved'|trans }}"></i>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-warning" onclick="clearAllGrades()">
+                                <i class="fa fa-eraser"></i> {{ 'mass_grade.clear_all'|trans }}
+                            </button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fa fa-save"></i> {{ 'action.save'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="alert alert-info mt-4">
+            <h5><i class="fa fa-info-circle"></i> {{ 'mass_grade.help_title'|trans }}</h5>
+            <ul class="mb-0">
+                <li>{{ 'mass_grade.help_1'|trans }}</li>
+                <li>{{ 'mass_grade.help_2'|trans }}</li>
+                <li>{{ 'mass_grade.help_3'|trans }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function clearAllGrades() {
+            if (confirm('{{ 'mass_grade.confirm_clear'|trans }}')) {
+                document.querySelectorAll('.grade-input').forEach(input => {
+                    input.value = '';
+                });
+            }
+        }
+
+        // Auto-focus sur le premier champ vide
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstEmptyInput = document.querySelector('.grade-input:not([value])');
+            if (firstEmptyInput) {
+                firstEmptyInput.focus();
+            }
+        });
+
+        // Navigation au clavier (Enter pour passer au champ suivant)
+        document.querySelectorAll('.grade-input').forEach((input, index, inputs) => {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const nextInput = inputs[index + 1];
+                    if (nextInput) {
+                        nextInput.focus();
+                        nextInput.select();
+                    } else {
+                        document.getElementById('massGradeForm').submit();
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

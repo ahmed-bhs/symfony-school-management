@@ -1,0 +1,51 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    <i class="fa fa-edit"></i> {{ 'mass_grade.select_class_title'|trans }}
+{% endblock %}
+
+{% block main %}
+    <div class="class-selection-container">
+        <div class="selection-header">
+            <h2>{{ 'mass_grade.select_class_description'|trans }}</h2>
+            <p class="text-muted">{{ 'mass_grade.select_class_help'|trans }}</p>
+        </div>
+
+        <div class="class-cards-grid">
+            {% for classe in classes %}
+                {% set colorIndex = classe.id % 8 %}
+                <a href="{{ path('admin_mass_grade_select_evaluation', {classeId: classe.id}) }}"
+                   class="class-card class-card-color-{{ colorIndex }}">
+                    <div class="class-card-header">
+                        <div class="class-icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="class-badge">
+                            <span class="badge badge-primary">{{ classe.etudiants.count }}</span>
+                        </div>
+                    </div>
+
+                    <div class="class-card-body">
+                        <h3 class="class-title">{{ classe.description }}</h3>
+                        <p class="class-year">
+                            <i class="fa fa-calendar"></i> {{ 'form.year'|trans }}: {{ classe.annee }}
+                        </p>
+                        <p class="class-count">
+                            {{ classe.etudiants.count }} {{ 'entity.students'|trans|lower }}
+                        </p>
+                    </div>
+
+                    <div class="class-card-footer">
+                        <span class="view-link">
+                            {{ 'mass_grade.select'|trans }} <i class="fa fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fa fa-info-circle"></i> {{ 'class_selection.no_classes'|trans }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
