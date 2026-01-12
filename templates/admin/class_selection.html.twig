@@ -17,7 +17,7 @@
                 {% set count = item.count %}
 
                 <a href="{{ ea_url()
-                    .setController('App\\\\Controller\\\\Admin\\\\' ~ entity_name ~ 'CrudController')
+                    .setController('App\\Controller\\Admin\\' ~ entity_name ~ 'CrudController')
                     .setAction('index')
                     .set('filters[classe][value]', classe.id)
                 }}" class="class-card">
@@ -55,7 +55,7 @@
 
         <div class="selection-footer">
             <a href="{{ ea_url()
-                .setController('App\\\\Controller\\\\Admin\\\\' ~ entity_name ~ 'CrudController')
+                .setController('App\\Controller\\Admin\\' ~ entity_name ~ 'CrudController')
                 .setAction('index')
             }}" class="btn btn-secondary">
                 <i class="fa fa-list"></i> {{ 'class_selection.view_all'|trans }}
